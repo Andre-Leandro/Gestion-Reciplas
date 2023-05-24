@@ -42,11 +42,10 @@ export default function ComprasRealizadas() {
         <div style={{ padding: "0px 0px 20px 20px" }}>
           <Navegacion />
         </div>
-        <h1 style={{ margin: "0" }}>COMPRAS REALIZADAS</h1>
+        <h1 style={{ margin: "0" }}>COMPRAS PENDIENTES DE PAGO</h1>
       </div>
       <div className="Caja">
         <CssBaseline />
-        <Buscador searchTerm={searchTerm} onSearchTermChange={setSearchTerm} />
         <TablaCompras />
         <div
           style={{
