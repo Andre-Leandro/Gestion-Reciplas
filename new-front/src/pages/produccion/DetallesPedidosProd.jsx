@@ -1,6 +1,6 @@
 
-import Navegacion from "../components/Navegacion";
-import TablaListadoDeProductos from "../components/TablaListadoDeProductos";
+import Navegacion from "../../components/Navegacion";
+import TablaListadoDeProductos from "../../components/TablaListadoDeProductos";
 
 import * as React from "react";
 import CssBaseline from "@mui/material/CssBaseline";

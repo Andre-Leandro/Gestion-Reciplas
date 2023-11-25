@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import Modal from "react-overlays/Modal";
-import "../Modal.css";
-import Navegacion from "../components/Navegacion";
+import "../../Modal.css";
+import Navegacion from "../../components/Navegacion";
 import CssBaseline from "@mui/material/CssBaseline";
 import Grid from "@mui/material/Unstable_Grid2";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import Producto from "../imagenes/botella.jpg";
-import CampoValor from "../components/CampoValor";
+import Producto from "../../imagenes/botella.jpg";
+// import CampoValor from "../../components/CampoValor";
 import { Button } from "@mui/material";
-import "../componentsStyles.css";
+import "../../componentsStyles.css";
 
 export default function ProductosFabricados() {
   const [showModal, setShowModal] = useState(false);

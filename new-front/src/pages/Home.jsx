@@ -1,6 +1,7 @@
 import React from "react";
 import Navegacion from "../components/Navegacion";
 import CssBaseline from "@mui/material/CssBaseline";
+import "../componentsStyles.css"
 
 const Home = ({ usuario1 }) => {
   document.title = "Home";

@@ -1,14 +1,14 @@
-import Navegacion from "../components/Navegacion";
+import Navegacion from "../../components/Navegacion";
 
 import * as React from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import Grid from "@mui/material/Unstable_Grid2";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import RegistrarMP from "../components/RegistrarMP";
-import ListboxProveedor from "../components/ListboxProveedor";
+import RegistrarMP from "../../components/RegistrarMP";
+import ListboxProveedor from "../../components/ListboxProveedor";
 import Modal from "react-overlays/Modal";
-import "../Modal.css";
+import "../../Modal.css";
 import { useState } from "react";
 
 function Datos() {

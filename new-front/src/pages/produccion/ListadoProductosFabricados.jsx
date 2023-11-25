@@ -1,9 +1,9 @@
 import React from "react";
-import TablaProductosFabricados from "../components/TablaProductosFabricados";
-import Tabla from "../components/Tabla";
+import TablaProductosFabricados from "../../components/TablaProductosFabricados";
+import Tabla from "../../components/Tabla";
 import { useState } from "react";
 import Modal from "react-overlays/Modal";
-import Navegacion from "../components/Navegacion";
+import Navegacion from "../../components/Navegacion";
 import CssBaseline from "@mui/material/CssBaseline";
 
 const ListadoProductosFabricados = () => {
