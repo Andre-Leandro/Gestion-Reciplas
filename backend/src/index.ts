@@ -1,21 +1,3 @@
-// import express, { Application } from "express";
-// import { PrismaClient } from "@prisma/client";
-// import { createRouter } from "./router";
-// // import "express-async-errors";
-
-// const prismaClient = new PrismaClient();
-// prismaClient
-//   .$connect()
-//   .then(() => console.info("Conexión exitosa con la base de datos"));
-
-// const app: Application = express();
-
-// app.use("/", createRouter(prismaClient));
-
-// app.listen(3001, () => {
-//   console.info("Servidor desplegado en el puerto " + 3000);
-// });
-
 import express, { Application, json } from 'express';
 import { PrismaClient } from '@prisma/client';
 import { createRouter } from './router';

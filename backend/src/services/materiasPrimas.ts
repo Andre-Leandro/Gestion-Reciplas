@@ -26,19 +26,15 @@ export class MateriaPrimaServiceImpl implements MateriaPrimaService {
   }
 
   async createMateriaPrima(materiaPrima: MateriaPrima): Promise<MateriaPrima> {
-    // Puedes agregar lógica adicional aquí antes de llamar al repositorio, si es necesario
     return await this.repo.createMateriaPrima(materiaPrima);
   }
 
   async updateMateriaPrima(materiaPrima: MateriaPrima): Promise<MateriaPrima | null> {
-    // Puedes agregar lógica adicional aquí antes de llamar al repositorio, si es necesario
     return await this.repo.updateMateriaPrima(materiaPrima);
   }
 
   async deleteMateriaPrima(materiaPrimaId: number): Promise<MateriaPrima | null> {
-    // Puedes agregar lógica adicional aquí antes de llamar al repositorio, si es necesario
     return await this.repo.deleteMateriaPrima(materiaPrimaId);
   }
 
-  // Agrega aquí cualquier método adicional necesario para tu lógica de negocio
 }

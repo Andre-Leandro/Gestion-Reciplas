@@ -10,7 +10,5 @@ export function proveedoresRouter(handler: ProveedorHandler): Router {
   router.patch("/:proveedorId", handler.updateProveedor());
   router.delete("/:proveedorId", handler.deleteProveedor());
 
-  // Puedes agregar más rutas según las necesidades de tu aplicación
-
   return router;
 }

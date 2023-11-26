@@ -10,7 +10,5 @@ export function materiasPrimasRouter(handler: MateriaPrimaHandler): Router {
   router.patch("/:materiaPrimaId", handler.updateMateriaPrima());
   router.delete("/:materiaPrimaId", handler.deleteMateriaPrima());
 
-  // Puedes agregar más rutas según las necesidades de tu aplicación
-
   return router;
 }

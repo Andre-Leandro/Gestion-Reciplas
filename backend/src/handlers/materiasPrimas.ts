@@ -65,5 +65,4 @@ export class MateriaPrimaHandler {
     };
   }
 
-  // Puedes agregar métodos adicionales según las necesidades de tu aplicación
 }

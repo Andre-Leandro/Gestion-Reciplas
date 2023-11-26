@@ -65,5 +65,4 @@ export class ProveedorHandler {
     };
   }
 
-  // Puedes agregar métodos adicionales según las necesidades de tu aplicación
 }

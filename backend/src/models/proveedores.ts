@@ -15,5 +15,3 @@ export type Proveedor = {
     habilitado: boolean;
   };
   
-  // ... (otros tipos existentes)
-  
