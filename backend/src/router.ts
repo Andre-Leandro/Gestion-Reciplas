@@ -2,24 +2,26 @@ import express, { Router } from "express";
 import cors from "cors";
 import { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
-import { ProductHandler } from "./handlers/productos";
-import { PrismaProductRepository } from "./repositories/productos";
-import { ProductServiceImpl } from "./services/productos";
-import { productsRouter } from "./routers/productos";
+
+import { MateriaPrimaHandler } from "./handlers/materiasPrimas";
+import { PrismaMateriasPrimasRepository } from "./repositories/materiasPrimas";
+import { MateriaPrimaServiceImpl } from "./services/materiasPrimas";
+import { materiasPrimasRouter } from "./routers/materiasPrimas";
+
 
 export function createRouter(prismaClient: PrismaClient): Router {
   const router = express.Router();
 
-  const productRepository = new PrismaProductRepository(prismaClient);
-  const productService = new ProductServiceImpl(productRepository);
-  const productHandler = new ProductHandler(productService);
+  const mpRepository = new PrismaMateriasPrimasRepository(prismaClient);
+  const mpService = new MateriaPrimaServiceImpl(mpRepository);
+  const mpHandler = new MateriaPrimaHandler(mpService);
 
   router.use(cors());
   router.use(express.urlencoded({ extended: true }));
   router.use(express.json());
   
-  // Rutas para productos
-  router.use("/productos", productsRouter(productHandler));
+  // Rutas
+  router.use('/materias-primas', materiasPrimasRouter(mpHandler))
   
   router.use((err: Error, _req: Request, res: Response) => {
     console.error(err.stack);
