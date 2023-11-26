@@ -8,6 +8,11 @@ import { PrismaMateriasPrimasRepository } from "./repositories/materiasPrimas";
 import { MateriaPrimaServiceImpl } from "./services/materiasPrimas";
 import { materiasPrimasRouter } from "./routers/materiasPrimas";
 
+import { ProveedorHandler } from "./handlers/proveedores";
+import { PrismaProveedorRepository } from "./repositories/proveedores";
+import { ProveedorServiceImpl } from "./services/proveedores";
+import { proveedoresRouter } from "./routers/proveedores";
+
 
 export function createRouter(prismaClient: PrismaClient): Router {
   const router = express.Router();
@@ -16,12 +21,17 @@ export function createRouter(prismaClient: PrismaClient): Router {
   const mpService = new MateriaPrimaServiceImpl(mpRepository);
   const mpHandler = new MateriaPrimaHandler(mpService);
 
+  const proveedorRepository = new PrismaProveedorRepository(prismaClient);
+  const proveedorService = new ProveedorServiceImpl(proveedorRepository);
+  const proveedorHandler = new ProveedorHandler(proveedorService);
+
   router.use(cors());
   router.use(express.urlencoded({ extended: true }));
   router.use(express.json());
   
   // Rutas
   router.use('/materias-primas', materiasPrimasRouter(mpHandler))
+  router.use('/proveedores', proveedoresRouter(proveedorHandler))
   
   router.use((err: Error, _req: Request, res: Response) => {
     console.error(err.stack);

@@ -11,7 +11,22 @@ datasource db {
 }
 
 model materiasprimas {
-  id           Int      @id @default(autoincrement())
-  nombre       String
+  id            Int    @id @default(autoincrement())
+  nombre        String
   cantidadStock Int
+}
+
+model proveedores {
+  id            Int      @id @default(autoincrement())
+  nombre        String
+  apellido      String
+  cuilCuit      String
+  direccion     String
+  localidad     String
+  provincia     String
+  telefono      String
+  correo        String
+  fechaRegistro DateTime @db.Date
+  descripcion   String
+  habilitado    Boolean
 }

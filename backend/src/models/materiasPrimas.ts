@@ -1,5 +1,5 @@
 export type MateriaPrima = {
-  id: number;
+  id?: number;
   nombre: string;
   cantidadStock: number;
 };
