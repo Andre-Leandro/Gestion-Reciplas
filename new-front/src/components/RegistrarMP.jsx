@@ -2,9 +2,10 @@ import * as React from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { Button } from "@mui/material";
 import { useState } from "react";
-import Listbox from "./Listbox";
-
+/* import Listbox from "./Listbox"; */
+import Productos from "../data/Productos.json";
 import TextField from "@mui/material/TextField";
+import Autocomplete from "@mui/material/Autocomplete";
 
 function RegistrarMP() {
   function eliminarElemento(row) {
@@ -13,6 +14,10 @@ function RegistrarMP() {
     setRows(nuevaLista);
     setTotalPedido((TotalPedido = TotalPedido - row.precio));
   }
+
+  /*     const handleOnChange = (event, value) => {
+    onSelect(value); // Aquí obtienes el valor seleccionado por el usuario
+  }; */
 
   const columns = [
     { field: "codigo", headerName: "ID", width: 90 },
@@ -61,18 +66,33 @@ function RegistrarMP() {
   const [rows, setRows] = useState([]);
 
   const agregarElemento = () => {
-    const nuevoElemento = {
-      id: rows.length + 1,
-      codigo: selectedValue.codigo,
-      producto: selectedValue.label,
-      cantidad: 1,
-      precio: selectedValue.precio,
-      total: selectedValue.precio,
-    };
-
-    setRows((prevRows) => [...prevRows, nuevoElemento]);
-    setTotalPedido((TotalPedido = TotalPedido + selectedValue.precio));
+    // Verificar si hay algo seleccionado
+    if (!selectedValue) {
+      // Manejar el caso en el que no hay nada seleccionado
+      console.warn("No hay ningún producto seleccionado.");
+      return;
+    }
+  
+    // Verificar si el producto ya está en rows
+    const productoExistente = rows.find((row) => row.codigo === selectedValue.codigo);
+  
+    if (!productoExistente) {
+      // Si el producto no está en rows, agregar un nuevo elemento
+      const nuevoElemento = {
+        id: rows.length + 1,
+        codigo: selectedValue.codigo,
+        producto: selectedValue.label,
+        cantidad: 1,
+        precio: selectedValue.precio,
+        total: selectedValue.precio,
+      };
+  
+      setRows((prevRows) => [...prevRows, nuevoElemento]);
+      setTotalPedido((total) => total + selectedValue.precio);
+    }
   };
+  
+  
 
   const [selectedValue, setSelectedValue] = useState(null);
 
@@ -80,13 +100,19 @@ function RegistrarMP() {
 
   const handleSelect = (value) => {
     setSelectedValue(value);
-    console.log(value.label); // Actualizar el estado con el valor seleccionado
   };
 
   return (
     <div style={{ height: "85%", width: "100%" }}>
       <div style={{ display: "flex", padding: "10px" }}>
-        <Listbox onSelect={handleSelect} />
+        <Autocomplete
+          disablePortal
+          id="combo-box-demo"
+          options={Productos}
+          sx={{ width: 300 }}
+          onChange={(event, value) => handleSelect(value)} // Utiliza el evento onChange para capturar el valor seleccionado
+          renderInput={(params) => <TextField {...params} label="Producto" />}
+        />
         <button className="Button" onClick={agregarElemento}>
           AGREGAR
         </button>
