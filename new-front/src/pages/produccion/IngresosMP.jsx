@@ -71,7 +71,7 @@ function IngresosMP() {
                 disablePortal
                 id="combo-box-demo"
                 options={Proveedores} // Proporciona directamente el arreglo de objetos
-                getOptionLabel={(option) => option.apellido}
+                getOptionLabel={(option) => option.label}
                 sx={{ width: 400 }}
                 renderInput={(params) => (
                   <TextField {...params} label="Proveedores" />
