@@ -19,6 +19,7 @@ interface ExtendedCompra extends Omit<Compra, 'lineasCompras'> {
 export interface CompraRepository {
   createCompra(compra: Compra): Promise<Compra>;
   getCompraById(compraId: number): Promise<Compra | null>;
+  getAllCompras(): Promise<Compra[]>;
   // Agrega otros métodos según sea necesario
 }
 
@@ -72,6 +73,23 @@ export class PrismaCompraRepository implements CompraRepository {
     });
 
     return compra ? this.mapToCompra(compra) : null;
+  }
+
+  async getAllCompras(): Promise<Compra[]> {
+    const compras = await this.prisma.compras.findMany({
+      include: {
+        lineascompras: {
+          include: {
+            materiaprima: true
+          }
+        },
+        proveedor: true,
+      },
+    });
+    
+    const comprasPromises = compras.map((compra) => this.mapToCompra(compra));
+    const comp = await Promise.all(comprasPromises)
+    return comp
   }
 
   private async mapToCompra(prismaCompra: ExtendedCompra): Promise<Compra> {
