@@ -1,0 +1,11 @@
+[
+    { "codigo": "6728901", "nombre": "Polietileno de baja densidad (PEBD)", "descripcion": "Plástico flexible y resistente", "precio": 10.0 },
+    { "codigo": "6728991", "nombre": "Polietileno de alta densidad (PEAD)", "descripcion": "Material rígido y duradero", "precio": 15.0 },
+    { "codigo": "6722344", "nombre": "Polipropileno (PP)", "descripcion": "Plástico versátil que se utiliza en la fabricación de diversos productos plásticos", "precio": 12.0 },
+    { "codigo": "6278111", "nombre": "Policloruro de vinilo (PVC)", "descripcion": "Plástico resistente al impacto y a la intemperie", "precio": 18.0 },
+    { "codigo": "6738901", "nombre": "Polietileno tereftalato (PET)", "descripcion": "Es un plástico transparente y resistente utilizado en la fabricación de botellas", "precio": 14.0 },
+    { "codigo": "6738991", "nombre": "Poliestireno (PS)", "descripcion": "Es un plástico rígido y transparente utilizado en la fabricación de vasos", "precio": 16.0 },
+    { "codigo": "6732344", "nombre": "Polipropileno expandido (PPE)", "descripcion": "Se utiliza en la fabricación de productos como bandejas de alimentos, envases protectores", "precio": 20.0 },
+    { "codigo": "6238111", "nombre": "Policarbonato (PC)", "descripcion": "Es un plástico transparente y resistente", "precio": 25.0 }
+  ]
+  

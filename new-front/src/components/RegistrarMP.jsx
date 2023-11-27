@@ -3,7 +3,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import { Button } from "@mui/material";
 import { useState } from "react";
 /* import Listbox from "./Listbox"; */
-import Productos from "../data/Productos.json";
+import MateriasPrimas from "../data/MateriasPrimas.json";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 
@@ -47,6 +47,8 @@ function RegistrarMP() {
       width: 160,
     },
     {
+      sortable: false,
+      disableSelectionOnClick: true,
       field: "eliminar",
       headerName: "",
       width: 110,
@@ -72,27 +74,27 @@ function RegistrarMP() {
       console.warn("No hay ningún producto seleccionado.");
       return;
     }
-  
+
     // Verificar si el producto ya está en rows
-    const productoExistente = rows.find((row) => row.codigo === selectedValue.codigo);
-  
+    const productoExistente = rows.find(
+      (row) => row.codigo === selectedValue.codigo
+    );
+
     if (!productoExistente) {
       // Si el producto no está en rows, agregar un nuevo elemento
       const nuevoElemento = {
         id: rows.length + 1,
         codigo: selectedValue.codigo,
-        producto: selectedValue.label,
+        producto: selectedValue.nombre,
         cantidad: 1,
         precio: selectedValue.precio,
         total: selectedValue.precio,
       };
-  
+
       setRows((prevRows) => [...prevRows, nuevoElemento]);
       setTotalPedido((total) => total + selectedValue.precio);
     }
   };
-  
-  
 
   const [selectedValue, setSelectedValue] = useState(null);
 
@@ -108,11 +110,13 @@ function RegistrarMP() {
         <Autocomplete
           disablePortal
           id="combo-box-demo"
-          options={Productos}
+          options={MateriasPrimas}
+          getOptionLabel={(option) => option.nombre} // Aquí se especifica la propiedad "nombre" como la que se mostrará en la interfaz
           sx={{ width: 300 }}
-          onChange={(event, value) => handleSelect(value)} // Utiliza el evento onChange para capturar el valor seleccionado
+          onChange={(event, value) => handleSelect(value)}
           renderInput={(params) => <TextField {...params} label="Producto" />}
         />
+
         <button className="Button" onClick={agregarElemento}>
           AGREGAR
         </button>
@@ -120,15 +124,15 @@ function RegistrarMP() {
       <div>
         {" "}
         <DataGrid
+          autoHeight
+          disableColumnFilter
+          disableColumnMenu
+          disableColumnSelector
+          disableRowSelectionOnClick
           rows={rows}
           columns={columns}
-          pageSize={5}
+          pageSize={100}
           disableSelectionOnClick
-          initialState={{
-            pagination: {
-              paginationModel: { page: 0, pageSize: 10 },
-            },
-          }}
           pageSizeOptions={[10, 20, 100]}
         />
       </div>

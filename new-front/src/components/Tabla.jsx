@@ -8,11 +8,12 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Checkbox, TextField, Grid, Button } from '@mui/material';
+import MateriasPrimas from "../data/MateriasPrimas.json"
 
 
 
 // Datos de ejemplo
-const rows = [
+/* const rows = [
   { name: '6728901', calories: "Polietileno de baja densidad (PEBD)", fat: "Plástico flexible y resistente", carbs: 24, protein: 4.0 },
   { name: '6728991', calories: "Polietileno de alta densidad (PEAD)", fat: "Material rígido y duradero", carbs: 37, protein: 4.3 },
   { name: '6722344', calories: "Polipropileno (PP)", fat: "Plástico versátil que se utiliza en la fabricación de diversos productos plásticos", carbs: 24, protein: 6.0 },
@@ -22,7 +23,7 @@ const rows = [
   { name: '6732344', calories: "Polipropileno expandido (PPE)", fat: "se utiliza en la fabricación de productos como bandejas de alimentos, envases protectores", carbs: 24, protein: 6.0 },
   { name: '6238111', calories: "Policarbonato (PC)", fat: "Es un plástico transparente y resistente ", carbs: 24, protein: 6.0 }
 
-];
+]; */
 
 
 const rows2 = [
@@ -42,7 +43,7 @@ function Buscador({ searchTerm, onSearchTermChange }) {
         type="text"
         value={searchTerm}
         onChange={(e) => onSearchTermChange(e.target.value)}
-        placeholder="Buscar ID"
+        placeholder="Buscar nombre"
       />
     </Grid>
 
@@ -55,8 +56,8 @@ export default function Tabla() {
   const [searchTerm, setSearchTerm] = useState('');
 
   // Filtra los datos según el término de búsqueda
-  const filteredRows = rows.filter((row) =>
-    row.name.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredRows = MateriasPrimas.filter((row) =>
+    row.nombre.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
@@ -82,15 +83,15 @@ export default function Tabla() {
           </TableHead>
           <TableBody>
             {filteredRows.map((row) => (
-              <TableRow key={row.name}>
+              <TableRow key={row.nombre}>
                 <TableCell align="center">
                   <Checkbox />
                 </TableCell>
                 <TableCell align="center">
-                  {row.name}
+                  {row.codigo}
                 </TableCell>
-                <TableCell align="center">{row.calories}</TableCell>
-                <TableCell align="center">{row.fat}</TableCell>
+                <TableCell align="center">{row.nombre}</TableCell>
+                <TableCell align="center">{row.descripcion}</TableCell>
                 <TableCell align="center">{row.carbs}</TableCell>
                 <TableCell align="center">{row.protein}</TableCell>
               </TableRow>
