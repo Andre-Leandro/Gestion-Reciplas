@@ -98,7 +98,10 @@ const areasData = {
     nombre: 'Clientes', link: "clientes", sub: false, icon: <ContactsOutlinedIcon />, submenus: [{ nombre: "Ver Clientes", link: "clientes" },
     { nombre: "Deudores", link: "deudores" }]
   },
-  { nombre: 'Proveedores', link: "proveedores", sub: true, icon: <TransferWithinAStationIcon /> },],
+  { nombre: 'Proveedores', link: "proveedores", sub: false, icon: <TransferWithinAStationIcon />, 
+  submenus: [{ nombre: "Ver Proveedores", link: "proveedores" },
+  { nombre: "Agregar", link: "agregar-proveedor" }]
+ },],
 
 
 
