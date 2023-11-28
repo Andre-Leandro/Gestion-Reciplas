@@ -36,13 +36,13 @@ export class PrismaCompraRepository implements CompraRepository {
         fecha: compra.fecha,
         comentarios: compra.comentarios || "",
         proveedor: {
-          connect: { id: compra.proveedor.id }, // Suponiendo que ya tienes el ID del proveedor
+          connect: { id: Number(compra.proveedor) }, // Suponiendo que ya tienes el ID del proveedor
         },
         lineascompras: {
           create: compra.lineasCompras.map((linea) => ({
             precio: linea.precio,
             cantidad: linea.cantidad,
-            materiaprima: { connect: { id: linea.materiaprima.id } }, // Ajuste aquí
+            materiaprima: { connect: { id: Number(linea.materiaprima) } }, // Ajuste aquí
           })),
         },
       },

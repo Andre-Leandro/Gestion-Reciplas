@@ -17,6 +17,7 @@ export class CompraServiceImpl implements CompraService {
   }
 
   async createCompra(compra: Compra): Promise<Compra> {
+    compra.fecha = new Date(compra.fecha)
     return await this.repo.createCompra(compra);
   }
 
