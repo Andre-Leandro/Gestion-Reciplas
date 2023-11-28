@@ -95,9 +95,9 @@ function Row(props) {
                             <Table size="small" aria-label="purchases">
                                 <TableHead>
                                     <TableRow>
-                                        <TableCell align="center">Fecha</TableCell>
-                                        <TableCell align="center">ID Venta</TableCell>
-                                        <TableCell align="center">Total ($)</TableCell>
+                                        <TableCell align="center"><strong>Fecha</strong></TableCell>
+                                        <TableCell align="center"><strong>ID Venta</strong></TableCell>
+                                        <TableCell align="center"><strong>Total ($)</strong></TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
@@ -145,7 +145,7 @@ const rows = [
 
 export default function TablaClientes() {
     return (
-        <Grid>
+        <Grid style={{ width: '100%', padding: '10px' }}>
             <Grid container direction="row" xs={12}>
                 <div style={{ paddingBottom: '30px', marginRight: "5px" }}>
                     <BuscadorID />
