@@ -10,9 +10,11 @@ import { getAllMateriasPrimas } from "../utils/api/materiasPrimas";
 import { useQuery } from "react-query";
 
 function RegistrarMP() {
-  const { data, isLoading, error } = useQuery("materias", () => getAllMateriasPrimas());
-  const [materiasPrimas, setMateriasPrimas] = useState(data|| []);
-/*   const { mutate, isLoading } = useMutation({
+  const { data, isLoading, error } = useQuery("materias", () =>
+    getAllMateriasPrimas()
+  );
+  const [materiasPrimas, setMateriasPrimas] = useState(data || []);
+  /*   const { mutate, isLoading } = useMutation({
     mutationFn: (formData) => updatePID(Number(idPid), formData),
     onSuccess: () => {
       console.log("Salio todo bien");
@@ -31,7 +33,7 @@ function RegistrarMP() {
   const [rows, setRows] = useState([]);
 
   const agregarElemento = () => {
-    console.log(data)
+    console.log(data);
     // Verificar si hay algo seleccionado
     if (!selectedValue) {
       // Manejar el caso en el que no hay nada seleccionado
@@ -40,30 +42,30 @@ function RegistrarMP() {
     }
 
     // Verificar si el producto ya está en rows
-    const productoExistente = rows.find(
-      (row) => row.id === selectedValue.id
+    const productoExistente = dataTable.find(
+      (row) => row.codigo === selectedValue.id
     );
 
     if (!productoExistente) {
       // Si el producto no está en rows, agregar un nuevo elemento
       const nuevoElemento = {
-        id: rows.length + 1,
-        codigo: selectedValue.codigo,
+        id: dataTable.length + 1,
+        codigo: selectedValue.id,
         producto: selectedValue.nombre,
-        cantidad: 1,
-        precio: selectedValue.precio,
-        total: selectedValue.precio,
+        cantidad: 0,
+        precio: 0,
+        total: 0,
       };
 
-      setRows((prevRows) => [...prevRows, nuevoElemento]);
+      setDataTable((prevData) => [...prevData, nuevoElemento]);
       setTotalPedido((total) => total + selectedValue.precio);
     }
   };
 
   function eliminarElemento(row) {
     const id = row.id;
-    const nuevaLista = rows.filter((row) => row.id !== id);
-    setRows(nuevaLista);
+    const nuevaLista = dataTable.filter((row) => row.id !== id);
+    setDataTable(nuevaLista);
     setTotalPedido((TotalPedido = TotalPedido - row.precio));
   }
 
@@ -89,7 +91,8 @@ function RegistrarMP() {
       field: "precio",
       headerName: "Precio",
       width: 110,
-      editable: false,
+      editable: true,
+
     },
     {
       field: "total",
@@ -125,6 +128,37 @@ function RegistrarMP() {
     setSelectedValue(value);
   };
 
+  const [dataTable, setDataTable] = useState([]);
+
+  const handleEdit = (params) => {
+    console.log(params);
+
+    // Obtener el nuevo valor editado
+    const nuevoValor = params.value
+
+    // Verificar qué campo se está editando
+    if (params.field === "cantidad" || params.field === "precio") {
+      // Acciones específicas cuando se edita la cantidad o el precio
+      console.log(`Editando ${params.field}: ${nuevoValor}`);
+    }
+
+    // Realizar otras acciones comunes aquí si es necesario
+
+/*     // Actualizar el estado con los nuevos datos
+    setDataTable(() => {
+      const rowIndex = dataTable.findIndex((item) => item.id === params.row.id);
+
+      // Actualizar el campo editado en el nuevo estado
+      dataTable[rowIndex][params.field] = nuevoValor;
+
+      // Actualizar el total
+      dataTable[rowIndex].total =
+        dataTable[rowIndex].cantidad * dataTable[rowIndex].precio;
+
+      return dataTable;
+    }); */
+  };
+
   return (
     <div style={{ height: "85%", width: "100%" }}>
       <div style={{ display: "flex", padding: "10px" }}>
@@ -150,11 +184,12 @@ function RegistrarMP() {
           disableColumnMenu
           disableColumnSelector
           disableRowSelectionOnClick
-          rows={rows}
+          rows={dataTable}
           columns={columns}
           pageSize={100}
           disableSelectionOnClick
           pageSizeOptions={[10, 20, 100]}
+          onCellEditStop={handleEdit}
         />
       </div>
       <div
