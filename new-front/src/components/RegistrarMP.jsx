@@ -33,22 +33,20 @@ function RegistrarMP() {
 
     // Verificar si el producto ya está en rows
     const productoExistente = dataTable.find(
-      (row) => row.codigo === selectedValue.id
+      (row) => row.id === selectedValue.id
     );
 
     if (!productoExistente) {
       // Si el producto no está en rows, agregar un nuevo elemento
       const nuevoElemento = {
-        id: dataTable.length + 1,
-        codigo: selectedValue.id,
-        producto: selectedValue.nombre,
-        cantidad: 0,
-        precio: 0,
-        total: 0,
+        id: selectedValue.id,
+        precio: 4,
+        cantidad: 3,
+        materiaprima: selectedValue,
       };
 
       setDataTable((prevData) => [...prevData, nuevoElemento]);
-      setTotalPedido((total) => total + selectedValue.precio);
+      setTotalPedido((TotalPedido += nuevoElemento.precio*nuevoElemento.cantidad));
     }
   };
 
@@ -56,14 +54,14 @@ function RegistrarMP() {
     const id = row.id;
     const nuevaLista = dataTable.filter((row) => row.id !== id);
     setDataTable(nuevaLista);
-    setTotalPedido((TotalPedido = TotalPedido - row.precio));
+    setTotalPedido((TotalPedido -= row.precio*row.cantidad));
   }
 
   /*     const handleOnChange = (event, value) => {
     onSelect(value); // Aquí obtienes el valor seleccionado por el usuario
   }; */
 
-  const columns = [
+/*   const columns = [
     { field: "codigo", headerName: "ID", width: 90 },
     {
       field: "producto",
@@ -107,7 +105,7 @@ function RegistrarMP() {
         </Button>
       ),
     },
-  ];
+  ]; */
 
   const [selectedValue, setSelectedValue] = useState(null);
 
@@ -211,10 +209,10 @@ function RegistrarMP() {
                   <TableCell component="th" scope="row">
                     {row.id}
                   </TableCell>
-                  <TableCell align="center">{row.producto}</TableCell>
+                  <TableCell align="center">{row.materiaprima.nombre}</TableCell>
                   <TableCell align="center">{row.cantidad}</TableCell>
                   <TableCell align="center">{row.precio}</TableCell>
-                  <TableCell align="center">{row.total}</TableCell>
+                  <TableCell align="center">{row.cantidad*row.precio}</TableCell>
                   <TableCell align="center">
                     {" "}
                     <Button
