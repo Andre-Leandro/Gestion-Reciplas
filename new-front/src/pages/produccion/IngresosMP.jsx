@@ -33,7 +33,7 @@ function IngresosMP() {
   } = useForm({
     defaultValues: {
       fecha: (new Date()).toISOString(),
-      comentarios: "buenardo",
+      comentarios: "",
     },
   });
 
@@ -205,8 +205,8 @@ function IngresosMP() {
                       Cancelar
                     </button>
                     <button className="primary-button"
-                      onClick={handleSubmit((values) => console.log("form: ", values))}
-                      // onClick={handleSubmit((values) => mutate(values))}
+                      // onClick={handleSubmit((values) => console.log("form: ", values))}
+                      onClick={handleSubmit((values) => mutate(values))}
                     >
                       Aceptar
                     </button>
