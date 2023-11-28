@@ -13,24 +13,6 @@ function RegistrarMP() {
   const { data, isLoading, error } = useQuery("materias", () =>
     getAllMateriasPrimas()
   );
-  const [materiasPrimas, setMateriasPrimas] = useState(data || []);
-  /*   const { mutate, isLoading } = useMutation({
-    mutationFn: (formData) => updatePID(Number(idPid), formData),
-    onSuccess: () => {
-      console.log("Salio todo bien");
-      // navigate(`/investigadores/5`);
-      navigate(-1);
-    },
-    onError: () => {
-      console.log("Salio todo mal");
-    },
-  });
-  const { fields, append, remove, update } = useFieldArray({
-    control, // Debes proporcionar el objeto control de useForm
-    name: "materiaPrimas", // Nombre del campo de formulario que es un arreglo
-  }); */
-
-  const [rows, setRows] = useState([]);
 
   const agregarElemento = () => {
     console.log(data);
@@ -92,7 +74,6 @@ function RegistrarMP() {
       headerName: "Precio",
       width: 110,
       editable: true,
-
     },
     {
       field: "total",
@@ -129,12 +110,11 @@ function RegistrarMP() {
   };
 
   const [dataTable, setDataTable] = useState([]);
-
   const handleEdit = (params) => {
     console.log(params);
 
     // Obtener el nuevo valor editado
-    const nuevoValor = params.value
+    const nuevoValor = params.value;
 
     // Verificar qué campo se está editando
     if (params.field === "cantidad" || params.field === "precio") {
@@ -144,19 +124,29 @@ function RegistrarMP() {
 
     // Realizar otras acciones comunes aquí si es necesario
 
-/*     // Actualizar el estado con los nuevos datos
-    setDataTable(() => {
-      const rowIndex = dataTable.findIndex((item) => item.id === params.row.id);
+    // Actualizar el estado con los nuevos datos de manera inmutable
+    setDataTable((prevDataTable) => {
+      const rowIndex = prevDataTable.findIndex(
+        (item) => item.id === params.row.id
+      );
 
-      // Actualizar el campo editado en el nuevo estado
-      dataTable[rowIndex][params.field] = nuevoValor;
+      // Crear una nueva matriz para evitar la mutación directa del estado
+      const newDataTable = [...prevDataTable];
 
-      // Actualizar el total
-      dataTable[rowIndex].total =
-        dataTable[rowIndex].cantidad * dataTable[rowIndex].precio;
+      // Actualizar el campo editado en la nueva matriz
+      newDataTable[rowIndex] = {
+        ...newDataTable[rowIndex],
+        [params.field]: nuevoValor,
+        total:
+          params.field === "cantidad"
+            ? nuevoValor * newDataTable[rowIndex].precio
+            : newDataTable[rowIndex].cantidad * nuevoValor,
+      };
 
-      return dataTable;
-    }); */
+      return newDataTable;
+    });
+
+    console.log(dataTable);
   };
 
   return (
@@ -186,10 +176,11 @@ function RegistrarMP() {
           disableRowSelectionOnClick
           rows={dataTable}
           columns={columns}
-          pageSize={100}
           disableSelectionOnClick
-          pageSizeOptions={[10, 20, 100]}
           onCellEditStop={handleEdit}
+          pagination={false}
+          pageSizeOptions={false}
+          hideFooterPagination
         />
       </div>
       <div
