@@ -32,7 +32,7 @@ export class PrismaMateriasPrimasRepository implements MateriasPrimasRepository 
     const createdMateriaPrima = await this.prisma.materiasprimas.create({
       data: {
         nombre: materiaPrima.nombre,
-        cantidadStock: materiaPrima.cantidadStock,
+        cantidadStock: parseFloat(String(materiaPrima.cantidadStock)),
       },
     });
     return this.mapToMateriaPrima(createdMateriaPrima);

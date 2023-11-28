@@ -40,8 +40,8 @@ export class PrismaCompraRepository implements CompraRepository {
         },
         lineascompras: {
           create: compra.lineasCompras.map((linea) => ({
-            precio: linea.precio,
-            cantidad: linea.cantidad,
+            precio: parseFloat(String(linea.precio)),
+            cantidad: parseFloat(String(linea.cantidad)),
             materiaprima: { connect: { id: Number(linea.materiaprima) } }, // Ajuste aquí
           })),
         },

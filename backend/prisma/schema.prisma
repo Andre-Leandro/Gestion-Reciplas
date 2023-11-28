@@ -13,7 +13,7 @@ datasource db {
 model materiasprimas {
   id            Int             @id @default(autoincrement())
   nombre        String
-  cantidadStock Int
+  cantidadStock Float
   lineascompras lineascompras[]
 }
 
@@ -45,7 +45,7 @@ model compras {
 model lineascompras {
   id             Int            @id @default(autoincrement())
   precio         Float
-  cantidad       Int
+  cantidad       Float
   compraId       Int
   compra         compras        @relation(fields: [compraId], references: [id])
   materiaPrimaId Int
