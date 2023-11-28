@@ -1,6 +1,7 @@
-/* import * as React from "react";
+import * as React from "react";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
+import MateriasPrimas from "../utils/data/MateriasPrimas.json"
 
 function Listbox({ onSelect }) {
   const handleOnChange = (event, value) => {
@@ -10,7 +11,8 @@ function Listbox({ onSelect }) {
     <Autocomplete
       disablePortal
       id="combo-box-demo"
-      options={productos}
+      options={MateriasPrimas}
+      getOptionLabel={(option) => option.nombre}
       sx={{ width: 300 }}
       onChange={handleOnChange}
       renderInput={(params) => <TextField {...params} label="Producto" />}
@@ -19,4 +21,4 @@ function Listbox({ onSelect }) {
 }
 
 
-export default Listbox; */
+export default Listbox;
