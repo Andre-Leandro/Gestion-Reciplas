@@ -16,12 +16,21 @@ import { useFieldArray, useForm } from "react-hook-form";
 import { useQuery, useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { createCompra } from "../../utils/api/compras";
+import { getAllProveedores } from "../../utils/api/proveedores";
 
 function IngresosMP() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
   const [dataTable, setDataTable] = useState([]);
-  const [proveedorSeleccionado, setProveedorSeleccionado] = useState()
+  const [proveedorSeleccionado, setProveedorSeleccionado] = useState();
+
+  const {
+    data,
+    isLoading: isLoadingMP,
+    error,
+  } = useQuery("proveedores", () => getAllProveedores());
+
+  console.log(data)
 
   const {
     control,
@@ -32,7 +41,7 @@ function IngresosMP() {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      fecha: (new Date()).toISOString(),
+      fecha: new Date().toISOString(),
       comentarios: "",
     },
   });
@@ -43,13 +52,13 @@ function IngresosMP() {
   });
 
   useEffect(() => {
-    console.log('Proveedor Seleccionado: ', proveedorSeleccionado)
-    setValue('proveedor', Number(proveedorSeleccionado?.id))
+    console.log("Proveedor Seleccionado: ", proveedorSeleccionado);
+    setValue("proveedor", Number(proveedorSeleccionado?.id));
   }, [proveedorSeleccionado]);
 
   useEffect(() => {
-    setValue('lineasCompras', dataTable)
-    console.log('Deprecado: ', dataTable)
+    setValue("lineasCompras", dataTable);
+    console.log("Deprecado: ", dataTable);
   }, [dataTable]);
 
   // Backdrop JSX code
@@ -75,12 +84,12 @@ function IngresosMP() {
   const { mutate, isLoading } = useMutation({
     mutationFn: (formData) => createCompra(formData),
     onSuccess: () => {
-      alert("Compra exitosa pibe 👽 👾")
+      alert("Compra exitosa pibe 👽 👾");
       navigate(-1);
     },
     onError: (error) => {
       const errorMessage = error?.message;
-      alert("Error inesperado: 👽 👾", errorMessage)
+      alert("Error inesperado: 👽 👾", errorMessage);
     },
   });
 
@@ -99,7 +108,9 @@ function IngresosMP() {
             <CssBaseline />
             <div style={{ display: "inline", width: "100%", height: "100%" }}>
               <div>
-                <h3 style={{ marginLeft: 5, textAlign: "left" }}>Datos de Ingreso</h3>
+                <h3 style={{ marginLeft: 5, textAlign: "left" }}>
+                  Datos de Ingreso
+                </h3>
               </div>
               <Box
                 sx={{
@@ -117,13 +128,15 @@ function IngresosMP() {
                     <Autocomplete
                       disablePortal
                       id="combo-box-demo"
-                      options={Proveedores} // Proporciona directamente el arreglo de objetos
-                      getOptionLabel={(option) => option.label}
+                      options={data} // Proporciona directamente el arreglo de objetos
+                      getOptionLabel={(option) => option.nombre}
                       sx={{ width: 400 }}
                       renderInput={(params) => (
                         <TextField {...params} label="Proveedores" />
                       )}
-                      onChange={(event, newValue) => setProveedorSeleccionado(newValue)}
+                      onChange={(event, newValue) =>
+                        setProveedorSeleccionado(newValue)
+                      }
                     />
                   </Grid>
                   <Grid item xs={7}>
@@ -132,7 +145,7 @@ function IngresosMP() {
                       enable
                       id="descripcion"
                       label="Comentarios (opcional)"
-                      {...register('comentarios')}
+                      {...register("comentarios")}
                     />
                   </Grid>
                 </Grid>
@@ -204,7 +217,8 @@ function IngresosMP() {
                     <button className="secondary-button" onClick={handleClose2}>
                       Cancelar
                     </button>
-                    <button className="primary-button"
+                    <button
+                      className="primary-button"
                       // onClick={handleSubmit((values) => console.log("form: ", values))}
                       onClick={handleSubmit((values) => mutate(values))}
                     >
