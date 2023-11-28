@@ -76,7 +76,7 @@ function IngresosMP() {
     mutationFn: (formData) => createCompra(formData),
     onSuccess: () => {
       alert("Compra exitosa pibe 👽 👾")
-      // navigate(-1);
+      navigate(-1);
     },
     onError: (error) => {
       const errorMessage = error?.message;
