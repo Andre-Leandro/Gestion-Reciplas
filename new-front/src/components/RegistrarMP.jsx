@@ -22,6 +22,10 @@ function RegistrarMP() {
     getAllMateriasPrimas()
   );
 
+  const [selectedValue, setSelectedValue] = useState(null);
+
+  let [totalPedido, setTotalPedido] = useState(0);
+
   const agregarElemento = () => {
     console.log(data);
     // Verificar si hay algo seleccionado
@@ -40,101 +44,89 @@ function RegistrarMP() {
       // Si el producto no está en rows, agregar un nuevo elemento
       const nuevoElemento = {
         id: selectedValue.id,
-        precio: 4,
-        cantidad: 3,
+        precio: 0,
+        cantidad: 0,
         materiaprima: selectedValue,
       };
 
       setDataTable((prevData) => [...prevData, nuevoElemento]);
-      setTotalPedido((TotalPedido += nuevoElemento.precio*nuevoElemento.cantidad));
+      setTotalPedido((prevTotal) => prevTotal + Number(nuevoElemento.precio) * Number(nuevoElemento.cantidad));
     }
   };
 
   function eliminarElemento(row) {
     const id = row.id;
+    const precio = Number(row.precio);
+    const cantidad = Number(row.cantidad);
+    const totalEliminar = precio * cantidad;
+
     const nuevaLista = dataTable.filter((row) => row.id !== id);
     setDataTable(nuevaLista);
-    setTotalPedido((TotalPedido -= row.precio*row.cantidad));
+    setTotalPedido((prevTotal) => Number(prevTotal) - totalEliminar);
   }
 
   /*     const handleOnChange = (event, value) => {
     onSelect(value); // Aquí obtienes el valor seleccionado por el usuario
   }; */
 
-/*   const columns = [
-    { field: "codigo", headerName: "ID", width: 90 },
-    {
-      field: "producto",
-      headerName: "Materia Prima",
-      width: 250,
-      editable: false,
-    },
-    {
-      field: "cantidad",
-      headerName: "Cantidad",
-      width: 150,
-      editable: true,
-    },
-    {
-      field: "precio",
-      headerName: "Precio",
-      width: 110,
-      editable: true,
-    },
-    {
-      field: "total",
-      headerName: "Total",
-      description: "This column has a value getter and is not sortable.",
-      sortable: false,
-      width: 160,
-    },
-    {
-      sortable: false,
-      disableSelectionOnClick: true,
-      field: "eliminar",
-      headerName: "",
-      width: 110,
-      editable: false,
-      renderCell: (params) => (
-        <Button
-          className="Button"
-          color="primary"
-          onClick={() => eliminarElemento(params.row)}
-        >
-          Eliminar
-        </Button>
-      ),
-    },
-  ]; */
-
-  const [selectedValue, setSelectedValue] = useState(null);
-
-  let [TotalPedido, setTotalPedido] = useState(0);
+  /*   const columns = [
+      { field: "codigo", headerName: "ID", width: 90 },
+      {
+        field: "producto",
+        headerName: "Materia Prima",
+        width: 250,
+        editable: false,
+      },
+      {
+        field: "cantidad",
+        headerName: "Cantidad",
+        width: 150,
+        editable: true,
+      },
+      {
+        field: "precio",
+        headerName: "Precio",
+        width: 110,
+        editable: true,
+      },
+      {
+        field: "total",
+        headerName: "Total",
+        description: "This column has a value getter and is not sortable.",
+        sortable: false,
+        width: 160,
+      },
+      {
+        sortable: false,
+        disableSelectionOnClick: true,
+        field: "eliminar",
+        headerName: "",
+        width: 110,
+        editable: false,
+        renderCell: (params) => (
+          <Button
+            className="Button"
+            color="primary"
+            onClick={() => eliminarElemento(params.row)}
+          >
+            Eliminar
+          </Button>
+        ),
+      },
+    ]; */
 
   const handleSelect = (value) => {
     setSelectedValue(value);
   };
 
   const [dataTable, setDataTable] = useState([]);
-  const handleEdit = (params) => {
-    console.log(params);
-
+  const handleEdit = (event, id, field) => {
     // Obtener el nuevo valor editado
-    const nuevoValor = params.value;
+    const nuevoValor = event.target.value;
 
-    // Verificar qué campo se está editando
-    if (params.field === "cantidad" || params.field === "precio") {
-      // Acciones específicas cuando se edita la cantidad o el precio
-      console.log(`Editando ${params.field}: ${nuevoValor}`);
-    }
-
-    // Realizar otras acciones comunes aquí si es necesario
-
-    // Actualizar el estado con los nuevos datos de manera inmutable
+    // Encontrar la fila correspondiente en el estado y actualizar el campo
     setDataTable((prevDataTable) => {
-      const rowIndex = prevDataTable.findIndex(
-        (item) => item.id === params.row.id
-      );
+      const rowIndex = prevDataTable.findIndex((item) => item.id === id);
 
       // Crear una nueva matriz para evitar la mutación directa del estado
       const newDataTable = [...prevDataTable];
@@ -142,17 +134,24 @@ function RegistrarMP() {
       // Actualizar el campo editado en la nueva matriz
       newDataTable[rowIndex] = {
         ...newDataTable[rowIndex],
-        [params.field]: nuevoValor,
+        [field]: nuevoValor,
         total:
-          params.field === "cantidad"
+          field === "cantidad"
             ? nuevoValor * newDataTable[rowIndex].precio
             : newDataTable[rowIndex].cantidad * nuevoValor,
       };
 
+      // Actualizar el total general
+      const newTotalPedido = newDataTable.reduce((total, row) => {
+        return total + Number(row.cantidad) * Number(row.precio);
+      }, 0);
+
+      setTotalPedido(newTotalPedido);
+
+      return newDataTable;
+
       return newDataTable;
     });
-
-    console.log(dataTable);
   };
 
   return (
@@ -210,9 +209,9 @@ function RegistrarMP() {
                     {row.id}
                   </TableCell>
                   <TableCell align="center">{row.materiaprima.nombre}</TableCell>
-                  <TableCell align="center">{row.cantidad}</TableCell>
-                  <TableCell align="center">{row.precio}</TableCell>
-                  <TableCell align="center">{row.cantidad*row.precio}</TableCell>
+                  <TableCell align="center"><TextField id="outlined-basic" variant="outlined" defaultValue={row.cantidad} onChange={(e) => handleEdit(e, row.id, 'cantidad')} /></TableCell>
+                  <TableCell align="center"><TextField id="outlined-basic" variant="outlined" defaultValue={row.precio} onChange={(e) => handleEdit(e, row.id, 'precio')} /></TableCell>
+                  <TableCell align="center">{Number(row.cantidad) * Number(row.precio)}</TableCell>
                   <TableCell align="center">
                     {" "}
                     <Button
@@ -239,7 +238,7 @@ function RegistrarMP() {
         }}
       >
         <p style={{ paddingRight: "5px" }}>TOTAL:</p>
-        <TextField disabled id="FechaRegistro" value={TotalPedido} />{" "}
+        <TextField disabled id="FechaRegistro" value={totalPedido} />{" "}
       </div>
     </div>
   );

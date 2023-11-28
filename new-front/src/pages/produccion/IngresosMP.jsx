@@ -84,7 +84,6 @@ function IngresosMP() {
                 enable
                 id="descripcion"
                 label="Comentarios (opcional)"
-                value=""
               />
             </Grid>
           </Grid>
