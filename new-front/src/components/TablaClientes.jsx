@@ -96,7 +96,7 @@ function Row(props) {
                                 <TableHead>
                                     <TableRow>
                                         <TableCell align="center">Fecha</TableCell>
-                                        <TableCell align="center">Id</TableCell>
+                                        <TableCell align="center">ID Venta</TableCell>
                                         <TableCell align="center">Total ($)</TableCell>
                                     </TableRow>
                                 </TableHead>
@@ -135,11 +135,12 @@ function Row(props) {
 
 const rows = [
     createData(123, 'Jorge Gonzalez', "02/05/2023", 99, "Particular"),
-    createData(234, 'Plasticor', "17/06/2023", 2, "Empresa"),
-    createData(345, 'Sixto Arrejin', "01/06/2023", 91, "Particular"),
-    createData(456, 'Tobias Maciel Meister', "17/06/2023", 2, "Particular"),
-    createData(567, 'Xtreme', "17/06/2023", 2, "Empresa"),
-    createData(678, 'Nilson', "19/06/2023", 99, "Particular"),
+    createData(234, 'Plasticor', "11/02/2023", 2, "Empresa"),
+    createData(345, 'Aldo Gomez', "01/06/2023", 91, "Particular"),
+    createData(456, 'Tobias Maciel Meister', "13/05/2023", 2, "Particular"),
+    createData(567, 'Telecom', "17/06/2023", 2, "Empresa"),
+    createData(678, 'Nilson Orrego', "19/06/2023", 99, "Particular"),
+    createData(567, 'Gigared', "17/06/2023", 2, "Empresa"),
 ];
 
 export default function TablaClientes() {

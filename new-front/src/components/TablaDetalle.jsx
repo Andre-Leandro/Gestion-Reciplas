@@ -12,11 +12,11 @@ function createData(codigo, producto, cantidad, precio, total) {
 }
 
 const rows = [
-  createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-  createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-  createData("Eclair", 262, 16.0, 24, 6.0),
-  createData("Cupcake", 305, 3.7, 67, 4.3),
-  createData("Gingerbread", 356, 16.0, 49, 3.9),
+  createData("Silla plástica pequeña", 159, 10.0, 24, 4.0),
+  createData("Bolsas de consorcio", 237, 4.0, 37, 4.3),
+  createData("Banco plastico de alta densidad", 262, 5.0, 24, 6.0),
+  createData("Reposera", 305, 3.0, 67, 4.3),
+  createData("Vasos medianos x25", 356, 5.0, 49, 3.9),
 ];
 
 function TablaDetalle() {
@@ -25,11 +25,11 @@ function TablaDetalle() {
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>Producto</TableCell>
-            <TableCell align="right">Codigo</TableCell>
-            <TableCell align="right">Cantidad</TableCell>
-            <TableCell align="right">Precio</TableCell>
-            <TableCell align="right">Total</TableCell>
+            <TableCell align="left"><strong>Producto</strong></TableCell>
+            <TableCell align="center"><strong>ID Producto</strong></TableCell>
+            <TableCell align="center"><strong>Cantidad</strong></TableCell>
+            <TableCell align="center"><strong>Precio ($)</strong></TableCell>
+            <TableCell align="center"><strong>Total</strong></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -38,13 +38,13 @@ function TablaDetalle() {
               key={row.codigo}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
-              <TableCell component="th" scope="row">
+              <TableCell align="left" component="th" scope="row">
                 {row.codigo}
               </TableCell>
-              <TableCell align="right">{row.producto}</TableCell>
-              <TableCell align="right">{row.cantidad}</TableCell>
-              <TableCell align="right">{row.precio}</TableCell>
-              <TableCell align="right">{row.total}</TableCell>
+              <TableCell align="center">{row.producto}</TableCell>
+              <TableCell align="center">{row.cantidad}</TableCell>
+              <TableCell align="center">{row.precio}</TableCell>
+              <TableCell align="center">{row.total}</TableCell>
             </TableRow>
           ))}
         </TableBody>
