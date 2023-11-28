@@ -9,13 +9,48 @@ import RegistrarMP from "../../components/RegistrarMP";
 /* import ListboxProveedor from "../../components/ListboxProveedor"; */
 import Modal from "react-overlays/Modal";
 import "../../Modal.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Autocomplete from "@mui/material/Autocomplete";
 import Proveedores from "../../utils/data/Proveedores.json";
-
+import { useFieldArray, useForm } from "react-hook-form";
+import { useQuery, useMutation } from "react-query";
+import { useNavigate } from "react-router-dom";
+import { createCompra } from "../../utils/api/compras";
 
 function IngresosMP() {
+  const navigate = useNavigate()
   const [showModal, setShowModal] = useState(false);
+  const [dataTable, setDataTable] = useState([]);
+  const [proveedorSeleccionado, setProveedorSeleccionado] = useState()
+
+  const {
+    control,
+    register,
+    handleSubmit,
+    setValue,
+    getValues,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      fecha: (new Date()).toISOString(),
+      comentarios: "buenardo",
+    },
+  });
+
+  const { fields, append, remove, update } = useFieldArray({
+    control, // Debes proporcionar el objeto control de useForm
+    name: "lineasCompras", // Nombre del campo de formulario que es un arreglo
+  });
+
+  useEffect(() => {
+    console.log('Proveedor Seleccionado: ', proveedorSeleccionado)
+    setValue('proveedor', Number(proveedorSeleccionado?.id))
+  }, [proveedorSeleccionado]);
+
+  useEffect(() => {
+    setValue('lineasCompras', dataTable)
+    console.log('Deprecado: ', dataTable)
+  }, [dataTable]);
 
   // Backdrop JSX code
   const renderBackdrop = (props) => <div className="backdrop" {...props} />;
@@ -37,6 +72,18 @@ function IngresosMP() {
     console.log("success");
   };
 
+  const { mutate, isLoading } = useMutation({
+    mutationFn: (formData) => createCompra(formData),
+    onSuccess: () => {
+      alert("Compra exitosa pibe 👽 👾")
+      // navigate(-1);
+    },
+    onError: (error) => {
+      const errorMessage = error?.message;
+      alert("Error inesperado: 👽 👾", errorMessage)
+    },
+  });
+
   return (
     <>
       <div className="Page">
@@ -49,52 +96,54 @@ function IngresosMP() {
         <div className="Caja">
           <CssBaseline />
           <React.Fragment>
-      <CssBaseline />
-      <div style={{ display: "inline", width: "100%", height: "100%" }}>
-        <div>
-          <h3 style={{ marginLeft: 5, textAlign: "left" }}>Datos de Ingreso</h3>
-        </div>
-        <Box
-          sx={{
-            padding: "20px",
-            width: "100%",
-            minheight: "100%",
-          }}
-        >
-          <Grid
-            container
-            rowSpacing={2}
-            columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-          >
-            <Grid item xs={5}>
-              <Autocomplete
-                disablePortal
-                id="combo-box-demo"
-                options={Proveedores} // Proporciona directamente el arreglo de objetos
-                getOptionLabel={(option) => option.label}
-                sx={{ width: 400 }}
-                renderInput={(params) => (
-                  <TextField {...params} label="Proveedores" />
-                )}
-              />
-            </Grid>
-            <Grid item xs={7}>
-              <TextField
-                fullWidth
-                enable
-                id="descripcion"
-                label="Comentarios (opcional)"
-              />
-            </Grid>
-          </Grid>
-        </Box>
-      </div>
-      <div></div>
-    </React.Fragment>
+            <CssBaseline />
+            <div style={{ display: "inline", width: "100%", height: "100%" }}>
+              <div>
+                <h3 style={{ marginLeft: 5, textAlign: "left" }}>Datos de Ingreso</h3>
+              </div>
+              <Box
+                sx={{
+                  padding: "20px",
+                  width: "100%",
+                  minheight: "100%",
+                }}
+              >
+                <Grid
+                  container
+                  rowSpacing={2}
+                  columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+                >
+                  <Grid item xs={5}>
+                    <Autocomplete
+                      disablePortal
+                      id="combo-box-demo"
+                      options={Proveedores} // Proporciona directamente el arreglo de objetos
+                      getOptionLabel={(option) => option.label}
+                      sx={{ width: 400 }}
+                      renderInput={(params) => (
+                        <TextField {...params} label="Proveedores" />
+                      )}
+                      onChange={(event, newValue) => setProveedorSeleccionado(newValue)}
+                    />
+                  </Grid>
+                  <Grid item xs={7}>
+                    <TextField
+                      fullWidth
+                      enable
+                      id="descripcion"
+                      label="Comentarios (opcional)"
+                      {...register('comentarios')}
+                    />
+                  </Grid>
+                </Grid>
+              </Box>
+            </div>
+            <div></div>
+          </React.Fragment>
         </div>
         <div className="Caja" style={{ margin: "20px" }}>
           <div className="Tabla">
-            <RegistrarMP />
+            <RegistrarMP dataTable={dataTable} setDataTable={setDataTable} />
           </div>{" "}
           <div style={{ textAlign: "right", width: "100%" }}>
             {" "}
@@ -155,7 +204,10 @@ function IngresosMP() {
                     <button className="secondary-button" onClick={handleClose2}>
                       Cancelar
                     </button>
-                    <button className="primary-button" onClick={handleSuccess2}>
+                    <button className="primary-button"
+                      onClick={handleSubmit((values) => console.log("form: ", values))}
+                      // onClick={handleSubmit((values) => mutate(values))}
+                    >
                       Aceptar
                     </button>
                   </div>

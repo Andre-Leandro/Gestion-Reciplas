@@ -1,17 +1,21 @@
 [
     {
+      "id": 1,
       "label": "PlastiPro",
       "apellido": "pepe"
     },
     {
+      "id": 2,
       "label": "EcoPlast",
       "apellido": "pepe"
     },
     {
+      "id": 3,
       "label": "Plastic Solutions",
       "apellido": "pepe"
     },
     {
+      "id": 4,
       "label": "GreenPlast",
       "apellido": "pepe"
     }

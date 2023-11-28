@@ -7,8 +7,8 @@ import { useState } from "react";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import { getAllMateriasPrimas } from "../utils/api/materiasPrimas";
-import { useQuery } from "react-query";
-
+import { useQuery, useMutation } from "react-query";
+import { useNavigate } from "react-router-dom";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -17,8 +17,8 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 
-function RegistrarMP() {
-  const { data, isLoading, error } = useQuery("materias", () =>
+function RegistrarMP( {dataTable, setDataTable} ) {
+  const { data, isLoading: isLoadingMP, error } = useQuery("materias", () =>
     getAllMateriasPrimas()
   );
 
@@ -119,7 +119,7 @@ function RegistrarMP() {
     setSelectedValue(value);
   };
 
-  const [dataTable, setDataTable] = useState([]);
+  // const [dataTable, setDataTable] = useState([]);
   const handleEdit = (event, id, field) => {
     // Obtener el nuevo valor editado
     const nuevoValor = event.target.value;
