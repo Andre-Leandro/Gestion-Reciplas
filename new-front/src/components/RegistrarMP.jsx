@@ -9,6 +9,14 @@ import Autocomplete from "@mui/material/Autocomplete";
 import { getAllMateriasPrimas } from "../utils/api/materiasPrimas";
 import { useQuery } from "react-query";
 
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
+
 function RegistrarMP() {
   const { data, isLoading, error } = useQuery("materias", () =>
     getAllMateriasPrimas()
@@ -168,7 +176,7 @@ function RegistrarMP() {
       </div>
       <div>
         {" "}
-        <DataGrid
+        {/* <DataGrid
           autoHeight
           disableColumnFilter
           disableColumnMenu
@@ -181,8 +189,49 @@ function RegistrarMP() {
           pagination={false}
           pageSizeOptions={false}
           hideFooterPagination
-        />
+        /> */}
+        <TableContainer component={Paper}>
+          <Table sx={{ minWidth: 650 }} aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell>ID</TableCell>
+                <TableCell align="center">Materia Prima</TableCell>
+                <TableCell align="center">Cantidad</TableCell>
+                <TableCell align="center">Precio</TableCell>
+                <TableCell align="center">Total</TableCell>
+                <TableCell align="center">Eliminar</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {dataTable.map((row) => (
+                <TableRow
+                  key={row.id}
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  <TableCell component="th" scope="row">
+                    {row.id}
+                  </TableCell>
+                  <TableCell align="center">{row.producto}</TableCell>
+                  <TableCell align="center">{row.cantidad}</TableCell>
+                  <TableCell align="center">{row.precio}</TableCell>
+                  <TableCell align="center">{row.total}</TableCell>
+                  <TableCell align="center">
+                    {" "}
+                    <Button
+                      className="Button"
+                      color="primary"
+                      onClick={() => eliminarElemento(row)}
+                    >
+                      Eliminar
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
       </div>
+
       <div
         style={{
           justifyContent: "right",
