@@ -46,7 +46,7 @@ function RegistrarMP( {dataTable, setDataTable} ) {
         id: selectedValue.id,
         precio: 0,
         cantidad: 0,
-        materiaprima: selectedValue,
+        materiaprima: selectedValue.id,
       };
 
       setDataTable((prevData) => [...prevData, nuevoElemento]);
@@ -208,7 +208,7 @@ function RegistrarMP( {dataTable, setDataTable} ) {
                   <TableCell component="th" scope="row">
                     {row.id}
                   </TableCell>
-                  <TableCell align="center">{row.materiaprima.nombre}</TableCell>
+                  <TableCell align="center">{data.find((item) => item.id === row.materiaprima)?.nombre}</TableCell>
                   <TableCell align="center"><TextField id="outlined-basic" variant="outlined" defaultValue={row.cantidad} onChange={(e) => handleEdit(e, row.id, 'cantidad')} /></TableCell>
                   <TableCell align="center"><TextField id="outlined-basic" variant="outlined" defaultValue={row.precio} onChange={(e) => handleEdit(e, row.id, 'precio')} /></TableCell>
                   <TableCell align="center">{Number(row.cantidad) * Number(row.precio)}</TableCell>
