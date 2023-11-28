@@ -56,6 +56,25 @@ export class PrismaCompraRepository implements CompraRepository {
       },
     });
 
+    // Actualizar cantidadStock después de crear la compra
+    for (const lineaCompra of compra.lineasCompras) {
+      const materiaPrimaId = Number(lineaCompra.materiaprima);
+      const cantidad = parseFloat(String(lineaCompra.cantidad));
+
+      // Obtener la materia prima correspondiente
+      const materiaPrima = await this.prisma.materiasprimas.findUnique({
+        where: { id: materiaPrimaId },
+      });
+
+      // Actualizar la cantidadStock
+      if (materiaPrima) {
+        await this.prisma.materiasprimas.update({
+          where: { id: materiaPrimaId },
+          data: { cantidadStock: materiaPrima.cantidadStock + cantidad },
+        });
+      }
+    }
+
     return this.mapToCompra(createdCompra);
   }
 
