@@ -8,7 +8,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Checkbox, TextField, Grid, Button } from '@mui/material';
-import MateriasPrimas from "../data/MateriasPrimas.json"
+import MateriasPrimas from "../utils/data/MateriasPrimas.json"
 
 
 

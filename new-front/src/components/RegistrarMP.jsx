@@ -3,7 +3,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import { Button } from "@mui/material";
 import { useState } from "react";
 /* import Listbox from "./Listbox"; */
-import MateriasPrimas from "../data/MateriasPrimas.json";
+import MateriasPrimas from "../utils/data/MateriasPrimas.json";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 

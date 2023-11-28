@@ -11,7 +11,7 @@ import Modal from "react-overlays/Modal";
 import "../../Modal.css";
 import { useState } from "react";
 import Autocomplete from "@mui/material/Autocomplete";
-import Proveedores from "../../data/Proveedores.json";
+import Proveedores from "../../utils/data/Proveedores.json";
 
 
 function IngresosMP() {
