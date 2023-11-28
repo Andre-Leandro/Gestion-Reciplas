@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "proveedores" ALTER COLUMN "cuilCuit" SET DATA TYPE TEXT,
+ALTER COLUMN "telefono" SET DATA TYPE TEXT;
