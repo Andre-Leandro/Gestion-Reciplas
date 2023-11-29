@@ -22,7 +22,7 @@ function BuscadorID() {
     return (
         <TextField
             fullWidth
-            label="Buscar ID"
+            label="Buscar cliente"
         />
     );
 }
@@ -107,7 +107,6 @@ function Row(props) {
                 <TableCell align="center">
                     {row.fecha}
                 </TableCell>
-                <TableCell align="center">{row.id}</TableCell>
                 <TableCell align="center">{row.cliente}</TableCell>
                 <TableCell align="center">{row.total}</TableCell>
                 <TableCell align="center">
@@ -132,11 +131,11 @@ function Row(props) {
                             <Table size="small" aria-label="purchases">
                                 <TableHead>
                                     <TableRow>
-                                        <TableCell align="center">Producto</TableCell>
-                                        <TableCell align="center">Descripcion</TableCell>
-                                        <TableCell align="center">P/U</TableCell>
-                                        <TableCell align="center">Cantidad</TableCell>
-                                        <TableCell align="center">Total price ($)</TableCell>
+                                        <TableCell align="center"> <strong>Producto </strong>  </TableCell>
+                                        <TableCell align="center"> <strong>Descripcion </strong></TableCell>
+                                        <TableCell align="center"> <strong>P/U </strong></TableCell>
+                                        <TableCell align="center"> <strong> Cantidad </strong> </TableCell>
+                                        <TableCell align="center"><strong>Total de línea($) </strong></TableCell>
 
                                     </TableRow>
                                 </TableHead>
@@ -173,12 +172,7 @@ function Row(props) {
                                     IMPRIMIR
                                 </button>
                             </Grid>
-                            {/* <div>
-                <button type="button" onClick={() => setShowModal(true)}>
-                  Open Modal
-                </button>
-              </div> */}
-
+ 
                             <Modal
                                 className="modal"
                                 show={showModal}
@@ -286,13 +280,11 @@ export default function TablaVentas() {
                         <TableRow>
                             <TableCell align="center">
                                 <Button color="info" size="small" variant="outlined">Todos</Button>
-                                {/* <button className='Button'>Select all</button>   */}
                             </TableCell>
-                            <TableCell align="center"><Typography variant="h6" color="initial">Fecha</Typography></TableCell>
-                            <TableCell align="center"><Typography variant="h6" color="initial">ID</Typography></TableCell>
-                            <TableCell align="center"><Typography variant="h6" color="initial">Cliente</Typography></TableCell>
-                            <TableCell align="center"><Typography variant="h6" color="initial">Total</Typography></TableCell>
-                            <TableCell align="center"><Typography variant="h6" color="initial">Detalles</Typography></TableCell>
+                            <TableCell align="center"><strong>Fecha</strong></TableCell>
+                            <TableCell align="center"><strong>Cliente</strong></TableCell>
+                            <TableCell align="center"><strong>Total</strong></TableCell>
+                            <TableCell align="center"><strong>Detalles</strong></TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
