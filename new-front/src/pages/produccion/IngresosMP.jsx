@@ -202,8 +202,27 @@ function IngresosMP() {
           </div>{" "}
           <div style={{ textAlign: "right", width: "100%" }}>
             {" "}
-            <button className="Button" onClick={openModalCancelar}>CANCELAR</button>
-            <button className="Button" onClick={openModal}>
+            <button
+              className="Button"
+              onClick={openModalCancelar}
+              style={{
+                backgroundColor: isLoading ? '#d3d3d3' : '', // Cambia el color a gris si isLoading es true
+                cursor: isLoading ? 'not-allowed' : 'pointer', // Cambia el cursor si isLoading es true
+                opacity: isLoading ? 0.6 : 1, // Ajusta la opacidad si isLoading es true
+              }}
+              >
+              CANCELAR
+            </button>
+            <button
+              className="Button"
+              onClick={openModal}
+              disabled={isLoading}
+              style={{
+                backgroundColor: isLoading ? '#d3d3d3' : '', // Cambia el color a gris si isLoading es true
+                cursor: isLoading ? 'not-allowed' : 'pointer', // Cambia el cursor si isLoading es true
+                opacity: isLoading ? 0.6 : 1, // Ajusta la opacidad si isLoading es true
+              }}
+            >
               GUARDAR
             </button>
             <CustomModal
