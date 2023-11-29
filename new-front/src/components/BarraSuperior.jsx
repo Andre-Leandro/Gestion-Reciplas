@@ -11,16 +11,16 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import MiImagen from './LogoFinal.png'
-import MiImagen2 from './avatar.png'
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import { useNavigate } from 'react-router-dom';
-import LogoutIcon from '@mui/icons-material/Logout';
+import MiImagen from "./LogoFinal.png";
+import MiImagen2 from "./avatar.png";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { useNavigate } from "react-router-dom";
+import LogoutIcon from "@mui/icons-material/Logout";
 
 const pages = [];
 const settings = ["Logout"];
 
-function BarraSuperior( {accion} ) {
+function BarraSuperior({ accion }) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -39,23 +39,24 @@ function BarraSuperior( {accion} ) {
     setAnchorElUser(null);
   };
 
-
   const navigate = useNavigate();
 
   const handlePepe = () => {
     accion(false);
-    navigate('/');
+    navigate("/");
   };
-
-
 
   return (
     <AppBar position="static" sx={{ backgroundColor: "#395372" }}>
       <Container maxWidth="x1">
         <Toolbar disableGutters>
-        <img src= {MiImagen} alt="Gestion Reciplas" height={35} sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
+          <img
+            src={MiImagen}
+            alt="Gestion Reciplas"
+            height={35}
+            sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
+          />
 
-          
           <Typography
             variant="h5"
             noWrap
@@ -71,8 +72,7 @@ function BarraSuperior( {accion} ) {
               color: "inherit",
               textDecoration: "none",
             }}
-          >
-          </Typography>
+          ></Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
               <Button
@@ -88,7 +88,7 @@ function BarraSuperior( {accion} ) {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Configuración">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Hasbulla" src= {<AccountCircleIcon />} />
+                <Avatar alt="Hasbulla" src={<AccountCircleIcon />} />
               </IconButton>
             </Tooltip>
             <Menu
@@ -108,8 +108,12 @@ function BarraSuperior( {accion} ) {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handlePepe}>
-                  <LogoutIcon></LogoutIcon>
+                <MenuItem
+                  key={setting}
+                  onClick={handlePepe}
+                  style={{ display: "flex", alignItems: "center" }}
+                >
+                  <LogoutIcon style={{ marginRight: "8px" }}></LogoutIcon>
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}
