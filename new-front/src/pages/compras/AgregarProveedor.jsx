@@ -26,7 +26,7 @@ function Datos() {
     provincia: "", 
     telefono: "",
     correo: "",
-    cuil:""
+    cuilCuit:""
   });
 
   const handleInputChange = (e) => {
@@ -36,8 +36,6 @@ function Datos() {
       [id]: value,
     }));
   };
-
-
 
   const { mutate, isLoading } = useMutation({
     mutationFn: (formData) => createProveedor(formData),
@@ -179,9 +177,9 @@ function Datos() {
               <TextField
                 fullWidth
                 enable
-                id="cuil"
+                id="cuilCuit"
                 label="CUIL/CUIT"
-                value={formData.cuil}
+                value={formData.cuilCuit}
                 onChange={handleInputChange}
                
                 
