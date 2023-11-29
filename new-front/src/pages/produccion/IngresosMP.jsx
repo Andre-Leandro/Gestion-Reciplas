@@ -184,74 +184,12 @@ function IngresosMP() {
             <CustomModal
               isOpen={isOpen}
               onClose={closeModal}
-              guardar={true}
+              aceptar={true}
+              cancelar={true}
               title="Registrar ingreso"
-              content="Se registrara el nuevo ingreso"
+              content="¿Desea registrar el ingreso?"
               onSave={handleSubmit((values) => mutate(values))}
             />
-            {/* <div>
-              <Modal
-                className="modal"
-                show={showModal}
-                onHide={handleClose}
-                renderBackdrop={renderBackdrop}
-              >
-                <div>
-                  <div className="modal-header">
-                    <div className="modal-title">Cancelar ingreso</div>
-                    <div>
-                      <span className="close-button" onClick={handleClose}>
-                        x
-                      </span>
-                    </div>
-                  </div>
-                  <div className="modal-desc">
-                    <p>¿Esta seguro de realizar dicha acción?</p>
-                  </div>
-                  <div className="modal-footer">
-                    <button className="secondary-button" onClick={handleClose}>
-                      Cancelar
-                    </button>
-                    <button className="primary-button" onClick={handleSuccess}>
-                      Aceptar
-                    </button>
-                  </div>
-                </div>
-              </Modal>
-              <Modal
-                className="modal"
-                show={showModal2}
-                onHide={handleClose2}
-                renderBackdrop={renderBackdrop2}
-              >
-                <div>
-                  <div className="modal-header">
-                    <div className="modal-title">Confirmar el ingreso</div>
-                    <div>
-                      <span className="close-button" onClick={handleClose2}>
-                        x
-                      </span>
-                    </div>
-                  </div>
-                  <div className="modal-desc">
-                    <p>¿Seguro que desea confirmar?</p>
-                  </div>
-                  <div className="modal-footer">
-                    <button className="secondary-button" onClick={handleClose2}>
-                      Cancelar
-                    </button>
-                    <button
-                      className="primary-button"
-                      // onClick={handleSubmit((values) => console.log("form: ", values))}
-                      // onClick={handleSubmit((values) => (mutate(values), setShowModal2(false)))}
-                      onClick={handleSubmit((values) => (mutate(values), setShowModal2(false)))}
-                    >
-                      Aceptar
-                    </button>
-                  </div>
-                </div>
-              </Modal>
-            </div> */}
           </div>
         </div>
       </div>

@@ -133,6 +133,7 @@ function Row(props) {
 
 const rows = [
     createData( 'Jorge Gonzalez', "Particular", "02/05/2023", 34)
+]
 
 export default function TablaClientes() {
     return (

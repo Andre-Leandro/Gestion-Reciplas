@@ -8,7 +8,7 @@ export default function CustomModal({
   title,
   content,
   onSave,
-  eliminar = false,
+  cancelar = false,
   aceptar = false,
 }) {
   const style = {
@@ -25,8 +25,14 @@ export default function CustomModal({
   };
 
   const buttonStyle = {
+    // backgroundColor: 'black',
+    // color: 'white',
+    color: 'red',
+    border: '1px solid black',
+    borderColor: 'red',
     marginTop: 8,
   };
+
 
   return (
     <Modal
@@ -49,8 +55,7 @@ export default function CustomModal({
         <Button
           onClick={onClose}
           style={buttonStyle}
-          color="primary"
-          variant="contained"
+          // variant="contained"
         >
           Cerrar
         </Button>
@@ -60,7 +65,7 @@ export default function CustomModal({
               onSave();
               onClose();
             }}
-            style={{ ...buttonStyle, marginLeft: 15 }}
+            style={{ marginLeft: 15, marginTop: 8, }}
             color="primary"
             variant="contained"
           >
@@ -73,14 +78,14 @@ export default function CustomModal({
               onSave();
               onClose();
             }}
-            style={{ ...buttonStyle, marginLeft: 15 }}
+            style={{ marginLeft: 15, marginTop: 8, }}
             color="primary"
             variant="contained"
           >
             Aceptar
           </Button>
         )}
-        {eliminar && (
+        {cancelar && (
           <Button
             onClick={() => {
               onSave();
@@ -88,9 +93,9 @@ export default function CustomModal({
             }}
             style={{ ...buttonStyle, marginLeft: 15 }}
             color="error"
-            variant="contained"
+            // variant="outlined"
           >
-            Eliminar
+            Cancelar
           </Button>
         )}
       </Box>

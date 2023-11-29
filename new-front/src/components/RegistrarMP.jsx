@@ -115,7 +115,7 @@ function RegistrarMP( {dataTable, setDataTable, totalPedido, setTotalPedido} ) {
           renderInput={(params) => <TextField {...params} label="Producto" />}
         />
 
-        <button className="Button" onClick={agregarElemento}>
+        <button className="Button" onClick={agregarElemento} style={{ marginLeft: "25px" }}>
           AGREGAR
         </button>
       </div>
