@@ -8,15 +8,42 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Grid from "@mui/material/Unstable_Grid2";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
+import { Button } from "@mui/material";
 
 function Datos() {
+
+
+  const [formData, setFormData] = useState({
+    nombre: "",
+    apellido: "",
+    dni: "",
+    direccion: "",
+    localidad: "",
+    provincia: "", //
+    telefono: "",
+    email: "",
+  });
+
+  const handleInputChange = (e) => {
+    const { id, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [id]: value,
+    }));
+  };
+
+  const handleSubmit = () => {
+    // Aquí puedes enviar formData a tu servidor o realizar otras acciones
+    console.log(formData);
+  };
+
   return (
     <React.Fragment>
       <CssBaseline />
       <div style={{ display: "inline", width: "100%", height: "100%" }}>
         <div>
           <h3 style={{ marginLeft: 5, textAlign: "left" }}>
-            Datos de Clientes
+            Datos del Proveedor
           </h3>
         </div>
         <Box
@@ -31,30 +58,50 @@ function Datos() {
             rowSpacing={2}
             columnSpacing={{ xs: 1, sm: 2, md: 3 }}
           >
-            <Grid item xs={6}>
+            <Grid item xs={4}>
               <TextField
                 fullWidth
                 enable
-                id="NyACliente"
+                id="nombre"
                 label="Nombre y Apellido"
+                value={formData.nombre}
+                onChange={handleInputChange}
                
               />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={4}>
               <TextField
                 fullWidth
                 enable
-                id="DNICliente"
+                id="apellido"
+                label="Apellido"
+                value={formData.apellido}
+                onChange={handleInputChange}
+               
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <TextField
+                fullWidth
+                enable
+                id="dni"
                 label="DNI"
+                value={formData.dni}
+                onChange={handleInputChange}
+               
                 
               />
             </Grid>
+            
             <Grid item xs={4}>
               <TextField
                 fullWidth
                 enable
-                id="DireccionCliente"
+                id="direccion"
                 label="Dirección"
+                value={formData.direccion}
+                onChange={handleInputChange}
+               
                 
               />
             </Grid>
@@ -62,8 +109,11 @@ function Datos() {
               <TextField
                 fullWidth
                 enable
-                id="LocalidadCliente"
+                id="localidad"
                 label="Localidad"
+                value={formData.localidad}
+                onChange={handleInputChange}
+               
                 
               />
             </Grid>
@@ -71,8 +121,11 @@ function Datos() {
               <TextField
                 fullWidth
                 enable
-                id="ProvinciaCliente"
+                id="provincia"
                 label="Provincia"
+                value={formData.provincia}
+                onChange={handleInputChange}
+               
                 
               />
             </Grid>
@@ -80,8 +133,11 @@ function Datos() {
               <TextField
                 fullWidth
                 enable
-                id="TelefonoCliente"
+                id="telefono"
                 label="Telefono"
+                value={formData.telefono}
+                onChange={handleInputChange}
+               
                 
               />
             </Grid>
@@ -89,8 +145,11 @@ function Datos() {
               <TextField
                 fullWidth
                 enable
-                id="EmailCliente"
+                id="email"
                 label="Correo Electronico"
+                value={formData.email}
+                onChange={handleInputChange}
+               
                 
               />
             </Grid>
@@ -98,6 +157,7 @@ function Datos() {
           </Grid>
         </Box>
       </div>
+      <Button onClick={handleSubmit} > Hola soy un boton</Button>
       <div></div>
     </React.Fragment>
   );
