@@ -23,7 +23,7 @@ function BuscadorID() {
   return (
     <TextField
       fullWidth
-      label="Buscar ID"
+      label="Buscar proveedor"
     />
   );
 }
@@ -108,7 +108,6 @@ function Row(props) {
         <TableCell align="center" >
           {row.fecha}
         </TableCell>
-        <TableCell align="center">{row.id}</TableCell>
         <TableCell align="center">{row.proveedor}</TableCell>
         <TableCell align="center">{row.total}</TableCell>
         <TableCell align="center">
@@ -173,11 +172,6 @@ function Row(props) {
                   IMPRIMIR
                 </button>
               </Grid>
-              {/* <div>
-                <button type="button" onClick={() => setShowModal(true)}>
-                  Open Modal
-                </button>
-              </div> */}
 
               <Modal
                 className="modal"
@@ -246,15 +240,6 @@ function Row(props) {
                 </div>
               </Modal>
 
-
-
-              {/* <Grid container
-              direction="row"
-              justifyContent="flex-end"
-              alignItems="center">
-              <Button variant="outlined">Imprimir</Button>
-            </Grid> */}
-
             </Box>
           </Collapse>
         </TableCell>
@@ -296,11 +281,10 @@ export default function TablaCompras() {
                 <Button color="info" size="small" variant="outlined">Todos</Button>
                 {/* <button className='Button'>Select all</button>   */}
               </TableCell>
-              <TableCell align="center"><Typography variant="h6" color="initial">Fecha</Typography></TableCell>
-              <TableCell align="center"><Typography variant="h6" color="initial">ID</Typography></TableCell>
-              <TableCell align="center"><Typography variant="h6" color="initial">Proveedor</Typography></TableCell>
-              <TableCell align="center"><Typography variant="h6" color="initial">Total</Typography></TableCell>
-              <TableCell align="center"><Typography variant="h6" color="initial">Detalles</Typography></TableCell>
+              <TableCell align="center"><strong>Fecha</strong></TableCell>
+              <TableCell align="center"><strong>Proveedor</strong></TableCell>
+              <TableCell align="center"><strong>Total</strong></TableCell>
+              <TableCell align="center"><strong>Detalles</strong></TableCell>
 
             </TableRow>
           </TableHead>

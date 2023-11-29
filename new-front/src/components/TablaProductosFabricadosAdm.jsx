@@ -37,7 +37,7 @@ function Buscador({ searchTerm, onSearchTermChange }) {
         type="number"
         value={searchTerm}
         onChange={(e) => onSearchTermChange(e.target.value)}
-        placeholder="Buscar ID"
+        placeholder="Buscar producto"
       />
     </Grid>
   );
@@ -84,11 +84,11 @@ export default function TablaProductosFabricados() {
                 <Button color="info" size="small" variant="outlined">Todos</Button>
                 {/* <button className='Button'>Select all</button>   */}
               </TableCell>
-              <TableCell align="center">Id</TableCell>
-              <TableCell align="center">Nombre</TableCell>
-              <TableCell align="center">Descripcion</TableCell>
-              <TableCell align="center">Cant. Minima&nbsp;(g)</TableCell>
-              <TableCell align="center">Cant. Actual&nbsp;(g)</TableCell>
+              <TableCell align="center"> <strong>Nombre </strong></TableCell>
+              <TableCell align="center"> <strong> Descripción</strong></TableCell>
+              <TableCell align="center"> <strong> Cant. Minima</strong></TableCell>
+              <TableCell align="center"> <strong>Cant. Actual </strong></TableCell>
+              <TableCell align="center"> <strong>Precio ($) </strong> </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -97,13 +97,11 @@ export default function TablaProductosFabricados() {
                 <TableCell align="center" >
                     <Checkbox />
                 </TableCell>
-                <TableCell align="center">
-                  {row.name}
-                </TableCell>
                 <TableCell align="center">{row.calories}</TableCell>
                 <TableCell align="center">{row.fat}</TableCell>
                 <TableCell align="center">{row.carbs}</TableCell>
                 <TableCell align="center">{row.protein}</TableCell>
+                <TableCell align="center">{row.protein* 2}</TableCell>
               </TableRow>
             ))}
           </TableBody>

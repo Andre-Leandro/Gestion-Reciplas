@@ -12,7 +12,7 @@ import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined
 import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
-//import foto from "";
+
 import { Grid } from "@mui/material";
 
 import { NavLink } from "react-router-dom";
@@ -23,7 +23,7 @@ const capitalizeFirstLetter = (area) => {
 };
 
 function BarraLateral({ campos, area }) {
-  // const { collapseSidebar } = useProSidebar();
+
 
   const [collapsed, setCollapsed] = useState(false)
   const collapseSidebar = () => {

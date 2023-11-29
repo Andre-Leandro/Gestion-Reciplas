@@ -58,12 +58,7 @@ import Usuarios from "./pages/administracion/Usuarios";
 import DetalleUsuario from "./pages/administracion/DetalleUsuario";
 import ModificarUsuario from "./pages/administracion/ModificarUsuario";
 import ModificarPedido from "./pages/ventas/ModificarPedido";
-
-
 import ViewListIcon from '@mui/icons-material/ViewList';
-import { useRadioGroup } from "@mui/material";
-
-
 
 
 const areasData = {
@@ -111,11 +106,8 @@ const areasData = {
 }
 
 
-
 const usuarios = [{ nombre: "Sixto", area: "administracion", contrasena: "sixto" }, { nombre: "Andre", area: "produccion", contrasena: "andre" },
 { nombre: "Gonzalo", area: "compras", contrasena: "gonzalo" }, { nombre: "Nilson", area: "ventas", contrasena: "nilson" }]
-
-
 
 
 function App() {
@@ -172,7 +164,6 @@ function App() {
         <Route path="login" element={<Registro2 accion={handleLogin} usuarios={usuarios} handleArea={handleArea} setUsuario1={setUsuario1} />} />
 
         <Route path="/" element={<Layout area={areaEmpresa} data={datosArea} accion={setIsLoggedIn} />}>
-          {/* Rutas protegidas */}
 
           <Route path="/" element={<Home usuario1={usuario1} />} />
           <Route path="materias-primas/listado" element={<ListadoMP />} />
