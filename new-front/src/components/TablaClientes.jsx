@@ -20,18 +20,17 @@ function BuscadorID() {
     return (
         <TextField
             fullWidth
-            label="Buscar ID"
+            label="Buscar cliente"
         />
     );
 }
 
-function createData(id, name, fecha, compras, tipo) {
+function createData(name, tipo, fecha, compras) {
     return {
-        id,
         name,
+        tipo,
         fecha,
         compras,
-        tipo,
         history: [
             {
                 fecha: "02/05/2023",
@@ -58,12 +57,11 @@ function Row(props) {
                     <Checkbox />
                 </TableCell>
                 <TableCell component="th" scope="row" align="center">
-                    {row.id}
-                </TableCell>
-                <TableCell component="th" scope="row" align="center">
                     {row.name}
                 </TableCell>
-                <TableCell align="center">{row.tipo}</TableCell>
+                <TableCell component="th" scope="row" align="center">
+                    {row.tipo}
+                </TableCell>
                 <TableCell align="center">{row.fecha}</TableCell>
                 <TableCell align="center">{row.compras}</TableCell>
                 <TableCell align="center">
@@ -88,16 +86,16 @@ function Row(props) {
                     <Collapse in={open} timeout="auto" unmountOnExit>
 
                         {/* Detalle de cada fila */}
-                        <Box sx={{ margin: 1 }}>
-                            <Typography variant="h6" gutterBottom component="div">
-                                Ventas realizadas al cliente
-                            </Typography>
+                        <Box sx={{ margin: 2 }}>
+                            
+                                <strong> Ventas realizadas al cliente</strong>
+             
                             <Table size="small" aria-label="purchases">
                                 <TableHead>
                                     <TableRow>
-                                        <TableCell align="center"><strong>Fecha</strong></TableCell>
-                                        <TableCell align="center"><strong>ID Venta</strong></TableCell>
-                                        <TableCell align="center"><strong>Total ($)</strong></TableCell>
+                                        <TableCell align="center"> <strong> Fecha Venta </strong></TableCell>
+                                        <TableCell align="center"> <strong> ID</strong></TableCell>
+                                        <TableCell align="center"> <strong> Total ($)</strong></TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
@@ -134,14 +132,7 @@ function Row(props) {
 
 
 const rows = [
-    createData(123, 'Jorge Gonzalez', "02/05/2023", 99, "Particular"),
-    createData(234, 'Plasticor', "11/02/2023", 2, "Empresa"),
-    createData(345, 'Aldo Gomez', "01/06/2023", 91, "Particular"),
-    createData(456, 'Tobias Maciel Meister', "13/05/2023", 2, "Particular"),
-    createData(567, 'Telecom', "17/06/2023", 2, "Empresa"),
-    createData(678, 'Nilson Orrego', "19/06/2023", 99, "Particular"),
-    createData(567, 'Gigared', "17/06/2023", 2, "Empresa"),
-];
+    createData( 'Jorge Gonzalez', "Particular", "02/05/2023", 34)
 
 export default function TablaClientes() {
     return (
@@ -159,13 +150,12 @@ export default function TablaClientes() {
                                 <Button color="info" size="small" variant="outlined">Todos</Button>
                                 {/* <button className='Button'>Select all</button>   */}
                             </TableCell>
-                            <TableCell align="center"><Typography variant="h6" color="initial">ID</Typography></TableCell>
-                            <TableCell align="center"><Typography variant="h6" color="initial">Nombre</Typography></TableCell>
-                            <TableCell align="center"><Typography variant="h6" color="initial">Tipo</Typography></TableCell>
-                            <TableCell align="center"><Typography variant="h6" color="initial">Fecha Registro</Typography></TableCell>
-                            <TableCell align="center"><Typography variant="h6" color="initial">Ventas</Typography></TableCell>
-                            <TableCell align="center"><Typography variant="h6" color="initial"> </Typography></TableCell>
-                            <TableCell align="center"><Typography variant="h6" color="initial"> </Typography></TableCell>
+                
+                            <TableCell align="center"><strong>Nombre</strong></TableCell>
+                            <TableCell align="center"><strong>Tipo </strong> </TableCell>
+                            <TableCell align="center"><strong>Fecha registro</strong></TableCell>
+                            <TableCell align="center"><strong> Cant.ventas</strong></TableCell>
+                
                         </TableRow>
                     </TableHead>
                     <TableBody>
