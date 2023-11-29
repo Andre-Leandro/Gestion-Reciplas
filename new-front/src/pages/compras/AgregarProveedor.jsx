@@ -14,6 +14,8 @@ import { useQuery, useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
 import CustomModal from "../../components/CustomModal";
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function AgregarProveedor() {
   const [showModal, setShowModal] = useState(false);
@@ -59,19 +61,35 @@ function AgregarProveedor() {
   const { mutate, isLoading } = useMutation({
     mutationFn: (formData) => createProveedor(formData),
     onSuccess: () => {
-      alert("Proveedor creado ");
-      navigate(-1);
+      // alert("Proveedor creado ");
+      toast.success("Proveedor registrado con exito", {
+        position: "bottom-center"})
+      // navigate('/proveedores');
+      setFormData({
+        nombre: "",
+        apellido: "",
+        dni: "",
+        direccion: "",
+        localidad: "",
+        provincia: "",
+        telefono: "",
+        correo: "",
+        cuilCuit: "",
+        descripcion:""
+      })
     },
     onError: (error) => {
       const errorMessage = error?.message;
-      alert("Error inesperado: busque a nilson", errorMessage);
+      // alert("Error inesperado: busque a nilson", errorMessage);
+      toast.error("Error de red 👾. Intente nuevamente", {
+        position: "bottom-center"})
     },
   });
 
   return (
     <>
       <div className="Page">
-        <div className="ParteSuperior">
+        <div className="ParteSuperior"><ToastContainer />
           <div style={{ padding: "0px 0px 20px 20px" }}>
             <Navegacion />
           </div>
