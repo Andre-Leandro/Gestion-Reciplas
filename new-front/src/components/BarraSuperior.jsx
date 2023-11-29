@@ -15,9 +15,10 @@ import MiImagen from './LogoFinal.png'
 import MiImagen2 from './avatar.png'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useNavigate } from 'react-router-dom';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 const pages = [];
-const settings = ["Cuenta", "Ajustes", "Logout"];
+const settings = ["Logout"];
 
 function BarraSuperior( {accion} ) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -108,6 +109,7 @@ function BarraSuperior( {accion} ) {
             >
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handlePepe}>
+                  <LogoutIcon></LogoutIcon>
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}
