@@ -95,9 +95,9 @@ function Row(props) {
                             <Table size="small" aria-label="purchases">
                                 <TableHead>
                                     <TableRow>
-                                        <TableCell align="center">Fecha</TableCell>
-                                        <TableCell align="center">Id</TableCell>
-                                        <TableCell align="center">Total ($)</TableCell>
+                                        <TableCell align="center"><strong>Fecha</strong></TableCell>
+                                        <TableCell align="center"><strong>ID Venta</strong></TableCell>
+                                        <TableCell align="center"><strong>Total ($)</strong></TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
@@ -135,16 +135,17 @@ function Row(props) {
 
 const rows = [
     createData(123, 'Jorge Gonzalez', "02/05/2023", 99, "Particular"),
-    createData(234, 'Plasticor', "17/06/2023", 2, "Empresa"),
-    createData(345, 'Sixto Arrejin', "01/06/2023", 91, "Particular"),
-    createData(456, 'Tobias Maciel Meister', "17/06/2023", 2, "Particular"),
-    createData(567, 'Xtreme', "17/06/2023", 2, "Empresa"),
-    createData(678, 'Nilson', "19/06/2023", 99, "Particular"),
+    createData(234, 'Plasticor', "11/02/2023", 2, "Empresa"),
+    createData(345, 'Aldo Gomez', "01/06/2023", 91, "Particular"),
+    createData(456, 'Tobias Maciel Meister', "13/05/2023", 2, "Particular"),
+    createData(567, 'Telecom', "17/06/2023", 2, "Empresa"),
+    createData(678, 'Nilson Orrego', "19/06/2023", 99, "Particular"),
+    createData(567, 'Gigared', "17/06/2023", 2, "Empresa"),
 ];
 
 export default function TablaClientes() {
     return (
-        <Grid>
+        <Grid style={{ width: '100%', padding: '10px' }}>
             <Grid container direction="row" xs={12}>
                 <div style={{ paddingBottom: '30px', marginRight: "5px" }}>
                     <BuscadorID />

@@ -93,9 +93,9 @@ function Row(props) {
                             <Table size="small" aria-label="purchases">
                                 <TableHead>
                                     <TableRow>
-                                        <TableCell align="center">Fecha</TableCell>
-                                        <TableCell align="center">Id</TableCell>
-                                        <TableCell align="center">Total ($)</TableCell>
+                                        <TableCell align="center"><strong>Fecha</strong></TableCell>
+                                        <TableCell align="center"><strong>ID Compra</strong></TableCell>
+                                        <TableCell align="center"><strong>Total ($)</strong></TableCell>
 
                                     </TableRow>
                                 </TableHead>
@@ -148,7 +148,7 @@ const rows = [
 
 export default function TablaProveedores() {
     return (
-        <Grid>
+        <Grid style={{ width: '100%', padding: '10px' }}>
             <Grid container direction="row" xs={12}>
                 <div style={{ paddingBottom: '30px', marginRight: "5px" }}>
                     <BuscadorID />

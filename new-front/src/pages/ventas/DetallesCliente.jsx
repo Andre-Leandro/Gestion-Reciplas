@@ -113,7 +113,7 @@ function RegistrarPedido() {
   );
 }
 
-function DetallesCliente() {
+function DetallesCliente({ area }) {
   const [showModal, setShowModal] = useState(false);
 
   // Backdrop JSX code
@@ -179,7 +179,7 @@ function DetallesCliente() {
         </div>
         {/* Aca va la tabla */}
         <div className="Caja">
-          <TablaHistorial />
+          <TablaHistorial persona='cliente' />
         </div>
       </div>
     </>
