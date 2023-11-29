@@ -20,6 +20,7 @@ import { useQuery, useMutation } from "react-query";
 import { getAllProveedores } from "../utils/api/proveedores";
 import { getAllCompras } from "../utils/api/compras";
 import { useState } from "react";
+import { formatoFechaISOaDDMMAAAA } from "../utils/general";
 
 function BuscadorID() {
   return <TextField fullWidth label="Buscar proveedor" />;
@@ -59,8 +60,10 @@ function Row(props) {
         <TableCell component="th" scope="row" align="center">
           {row.nombre}
         </TableCell>
-        <TableCell align="center">{row.fechaRegistro}</TableCell>
-        <TableCell align="center">{(row.compras).length}</TableCell>
+        <TableCell align="center">
+          {formatoFechaISOaDDMMAAAA(row.fechaRegistro)}
+        </TableCell>
+        <TableCell align="center">{row.compras?.length}</TableCell>
         <TableCell align="center">
           <NavLink to="/detalles-proveedor">
             <button className="Button">Detalle</button>
@@ -77,52 +80,48 @@ function Row(props) {
         </TableCell>
       </TableRow>
       <TableRow>
-                <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
-                    <Collapse in={open} timeout="auto" unmountOnExit>
-
-                        {/* Detalle de cada fila */}
-                        <Box sx={{ margin: 1 }}>
-                            <h3>
-                                Compras realizadas al proveedor
-                            </h3>
-                            <Table size="small" aria-label="purchases">
-                                <TableHead>
-                                    <TableRow>
-                                        <TableCell align="center"><strong>Fecha</strong></TableCell>
-                                        <TableCell align="center"><strong>ID Compra</strong></TableCell>
-                                        <TableCell align="center"><strong>Total ($)</strong></TableCell>
-
-                                    </TableRow>
-                                </TableHead>
-                                <TableBody>
-                                    {row.compras?.map((compra) => (
-                                        <TableRow key={compra.id}>
-                                            <TableCell component="th" scope="row" align="center">
-                                                {compra.id}
-                                            </TableCell>
-                                            <TableCell component="th" scope="row" align="center">
-                                                {compra.fecha}
-                                            </TableCell>
-                                            <TableCell align="center">
-                                                10
-                                            </TableCell>
-                                            <TableCell align="center">
-                                                <NavLink to="/detalle-compra">
-                                                    <button className='Button'>
-                                                        Detalle
-                                                    </button></NavLink>
-                                            </TableCell>
-
-
-                                        </TableRow>
-                                    ))}
-                                </TableBody>
-                            </Table>
-
-                        </Box>
-                    </Collapse>
-                </TableCell>
-            </TableRow>
+        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+          <Collapse in={open} timeout="auto" unmountOnExit>
+            {/* Detalle de cada fila */}
+            <Box sx={{ margin: 1 }}>
+              <h3>Compras realizadas al proveedor</h3>
+              <Table size="small" aria-label="purchases">
+                <TableHead>
+                  <TableRow>
+                    <TableCell align="center">
+                      <strong>Fecha</strong>
+                    </TableCell>
+                    <TableCell align="center">
+                      <strong>ID Compra</strong>
+                    </TableCell>
+                    <TableCell align="center">
+                      <strong>Total ($)</strong>
+                    </TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {row.compras?.map((compra) => (
+                    <TableRow key={compra.id}>
+                      <TableCell component="th" scope="row" align="center">
+                        {compra.id}
+                      </TableCell>
+                      <TableCell component="th" scope="row" align="center">
+                        {formatoFechaISOaDDMMAAAA(compra.fecha)}
+                      </TableCell>
+                      <TableCell align="center">{compra.total}</TableCell>
+                      <TableCell align="center">
+                        <NavLink to="/detalle-compra">
+                          <button className="Button">Detalle</button>
+                        </NavLink>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </Box>
+          </Collapse>
+        </TableCell>
+      </TableRow>
     </React.Fragment>
   );
 }
@@ -144,15 +143,23 @@ export default function TablaProveedores() {
   const proveedores = useQuery("proveedores", () => getAllProveedores()).data;
   const compras = useQuery("compras", () => getAllCompras()).data;
 
-  // Función para obtener las compras de un proveedor específico
-  const obtenerComprasPorProveedor = (proveedorId) => {
-    return compras?.filter((compra) => compra.proveedor.id === proveedorId);
+  // Función para calcular el total de una compra
+  const calcularTotalCompra = (compra) => {
+    return compra?.lineasCompras?.reduce(
+      (total, lineaCompra) => total + lineaCompra.precio * lineaCompra.cantidad,
+      0
+    );
   };
 
-  // Crear el array deseado con proveedores y sus compras
+  // Crear el array deseado con proveedores, compras y sus totales
   const proveedoresConCompras = proveedores?.map((proveedor) => ({
     ...proveedor,
-    compras: obtenerComprasPorProveedor(proveedor.id),
+    compras: compras
+      ?.filter((compra) => compra.proveedor.id === proveedor.id)
+      ?.map((compra) => ({
+        ...compra,
+        total: calcularTotalCompra(compra),
+      })),
   }));
 
   console.log(proveedoresConCompras);
