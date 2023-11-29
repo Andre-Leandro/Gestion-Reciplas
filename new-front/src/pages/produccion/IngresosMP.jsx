@@ -22,6 +22,9 @@ import CustomModal from "../../components/CustomModal";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+// import * as yup from "yup";
+// import { yupResolver } from '@hookform/resolvers/yup';
+
 function IngresosMP() {
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
