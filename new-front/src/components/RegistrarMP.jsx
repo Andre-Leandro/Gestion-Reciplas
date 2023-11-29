@@ -191,7 +191,6 @@ function RegistrarMP( {dataTable, setDataTable} ) {
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>
               <TableRow>
-                <TableCell>ID</TableCell>
                 <TableCell align="center">Materia Prima</TableCell>
                 <TableCell align="center">Cantidad</TableCell>
                 <TableCell align="center">Precio</TableCell>
@@ -205,9 +204,6 @@ function RegistrarMP( {dataTable, setDataTable} ) {
                   key={row.id}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
-                  <TableCell component="th" scope="row">
-                    {row.id}
-                  </TableCell>
                   <TableCell align="center">{data.find((item) => item.id === row.materiaprima)?.nombre}</TableCell>
                   <TableCell align="center"><TextField id="outlined-basic" variant="outlined" defaultValue={row.cantidad} onChange={(e) => handleEdit(e, row.id, 'cantidad')} /></TableCell>
                   <TableCell align="center"><TextField id="outlined-basic" variant="outlined" defaultValue={row.precio} onChange={(e) => handleEdit(e, row.id, 'precio')} /></TableCell>
