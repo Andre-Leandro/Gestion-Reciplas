@@ -76,8 +76,8 @@ export default function Tabla() {
               </TableCell>
               <TableCell align="center"><strong>Nombre</strong></TableCell>
               <TableCell align="center"><strong>Descripcion</strong></TableCell>
-              <TableCell align="center"><strong>Cant. Mínima (kg)</strong></TableCell>
-              <TableCell align="center"><strong>Cant. Actual (kg)</strong></TableCell>
+              <TableCell align="center"><strong>Cantidad Mínima (kg)</strong></TableCell>
+              <TableCell align="center"><strong>Cantidad Actual (kg)</strong></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

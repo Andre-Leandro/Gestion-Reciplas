@@ -34,7 +34,7 @@ function Buscador({ searchTerm, onSearchTermChange }) {
     <Grid container xs={3}>
       <TextField
             fullWidth
-            label="Buscar ID"
+            label="Buscar código"
         />
     </Grid>
     
@@ -81,10 +81,10 @@ export default function TablaPedidosNew() {
                 <Button color="info" size="small" variant="outlined">Todos</Button>
                 {/* <button className='Button'>Select all</button>   */}
               </TableCell>
-              <TableCell align="center"><Typography variant="h6" color="initial">ID Pedido</Typography></TableCell>
-              <TableCell align="center"><Typography variant="h6" color="initial">Nombre</Typography></TableCell>
-              <TableCell align="center"><Typography variant="h6" color="initial">Fecha</Typography></TableCell>
-              <TableCell align="center"><Typography variant="h6" color="initial">Estado</Typography></TableCell>
+              <TableCell align="center"><strong>Código pedido</strong></TableCell>
+              <TableCell align="center"><strong>Nombre cliente</strong></TableCell>
+              <TableCell align="center"><strong>Fecha</strong></TableCell>
+              <TableCell align="center"><strong>Estado</strong></TableCell>
               <TableCell align="center"> </TableCell>
             </TableRow>
           </TableHead>
@@ -94,9 +94,7 @@ export default function TablaPedidosNew() {
                 <TableCell align="center" component="th" scope="row">
                   <Checkbox />
                 </TableCell>
-                <TableCell align="center" component="th" scope="row">
-                  {row.name}
-                </TableCell>
+                <TableCell align="center">{row.name}</TableCell>
                 <TableCell align="center">{row.nombre}</TableCell>
                 <TableCell align="center">{row.fecha}</TableCell>
                 <TableCell align="center">{row.estado}</TableCell>
