@@ -74,11 +74,10 @@ export default function Tabla() {
                 <Button color="info" size="small" variant="outlined">Todos</Button>
                 {/* <button className='Button'>Select all</button>   */}
               </TableCell>
-              <TableCell align="center">ID</TableCell>
-              <TableCell align="center">Nombre</TableCell>
-              <TableCell align="center">Descripcion</TableCell>
-              <TableCell align="center">Cant. Minima&nbsp;(kg)</TableCell>
-              <TableCell align="center">Cant. Actual&nbsp;(kg)</TableCell>
+              <TableCell align="center"><strong>Nombre</strong></TableCell>
+              <TableCell align="center"><strong>Descripcion</strong></TableCell>
+              <TableCell align="center"><strong>Cant. Mínima (kg)</strong></TableCell>
+              <TableCell align="center"><strong>Cant. Actual (kg)</strong></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -87,13 +86,10 @@ export default function Tabla() {
                 <TableCell align="center">
                   <Checkbox />
                 </TableCell>
-                <TableCell align="center">
-                  {row.codigo}
-                </TableCell>
                 <TableCell align="center">{row.nombre}</TableCell>
                 <TableCell align="center">{row.descripcion}</TableCell>
-                <TableCell align="center">{row.carbs}</TableCell>
-                <TableCell align="center">{row.protein}</TableCell>
+                <TableCell align="center">{row.cantidadMin}</TableCell>
+                <TableCell align="center">{row.cantidadActual}</TableCell>
               </TableRow>
             ))}
           </TableBody>
