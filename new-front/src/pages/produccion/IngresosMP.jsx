@@ -15,7 +15,7 @@ import Proveedores from "../../utils/data/Proveedores.json";
 import { useFieldArray, useForm } from "react-hook-form";
 import { useQuery, useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
-import { createCompra } from "../../utils/api/compras";
+import { createIngreso } from "../../utils/api/ingresos";
 import { getAllProveedores } from "../../utils/api/proveedores";
 import CustomModal from "../../components/CustomModal";
 
@@ -71,7 +71,7 @@ function IngresosMP() {
 
   const { fields, append, remove, update } = useFieldArray({
     control, // Debes proporcionar el objeto control de useForm
-    name: "lineasCompras", // Nombre del campo de formulario que es un arreglo
+    name: "lineasIngreso", // Nombre del campo de formulario que es un arreglo
   });
 
   useEffect(() => {
@@ -80,7 +80,7 @@ function IngresosMP() {
   }, [proveedorSeleccionado]);
 
   useEffect(() => {
-    setValue("lineasCompras", dataTable);
+    setValue("lineasIngreso", dataTable);
     console.log("Deprecado: ", dataTable);
   }, [dataTable]);
 
@@ -105,7 +105,7 @@ function IngresosMP() {
   }; */
 
   const { mutate, isLoading } = useMutation({
-    mutationFn: (formData) => createCompra(formData),
+    mutationFn: (formData) => createIngreso(formData),
     onSuccess: () => {
       toast.success("Ingreso registrado con exito", {
         position: "bottom-center"})

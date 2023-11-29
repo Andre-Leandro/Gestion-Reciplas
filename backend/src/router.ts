@@ -14,10 +14,10 @@ import { PrismaProveedorRepository } from "./repositories/proveedores";
 import { ProveedorServiceImpl } from "./services/proveedores";
 import { proveedoresRouter } from "./routers/proveedores";
 
-import { CompraHandler } from "./handlers/compras";
-import { PrismaCompraRepository } from "./repositories/compras";
-import { CompraServiceImpl } from "./services/compras";
-import { comprasRouter } from "./routers/compras";
+import { IngresoHandler } from "./handlers/ingresosMP";
+import { PrismaIngresoRepository } from "./repositories/ingresosMP";
+import { IngresoServiceImpl } from "./services/ingresosMP";
+import { ingresosRouter } from "./routers/compras";
 
 export function createRouter(prismaClient: PrismaClient): Router {
   const router = express.Router();
@@ -30,9 +30,9 @@ export function createRouter(prismaClient: PrismaClient): Router {
   const proveedorService = new ProveedorServiceImpl(proveedorRepository);
   const proveedorHandler = new ProveedorHandler(proveedorService);
 
-  const compraRepository = new PrismaCompraRepository(prismaClient);
-  const compraService = new CompraServiceImpl(compraRepository);
-  const compraHandler = new CompraHandler(compraService);
+  const ingresoRepository = new PrismaIngresoRepository(prismaClient);
+  const ingresoService = new IngresoServiceImpl(ingresoRepository);
+  const ingresoHandler = new IngresoHandler(ingresoService);
 
   router.use(cors());
   router.use(express.urlencoded({ extended: true }));
@@ -42,7 +42,7 @@ export function createRouter(prismaClient: PrismaClient): Router {
   // Rutas
   router.use('/materias-primas', materiasPrimasRouter(mpHandler))
   router.use('/proveedores', proveedoresRouter(proveedorHandler))
-  router.use('/compras', comprasRouter(compraHandler))
+  router.use('/ingresos', ingresosRouter(ingresoHandler))
 
   router.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
     console.error(err.stack);

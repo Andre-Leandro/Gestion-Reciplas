@@ -1,13 +1,13 @@
 // routers/compras.ts
 import express, { Router } from "express";
-import { CompraHandler } from "../handlers/compras";
+import { IngresoHandler } from "../handlers/ingresosMP";
 
-export function comprasRouter(handler: CompraHandler): Router {
+export function ingresosRouter(handler: IngresoHandler): Router {
   const router = express.Router();
 
-  router.post("/", handler.createCompra());
-  router.get("/:compraId", handler.getCompraById());
-  router.get("/", handler.getAllCompras())
+  router.post("/", handler.createIngreso());
+  router.get("/:ingresoId", handler.getIngresoById());
+  router.get("/", handler.getAllIngresos())
   // Agrega otras rutas según sea necesario
 
   return router;

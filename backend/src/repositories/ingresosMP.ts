@@ -2,44 +2,44 @@
 import {
   PrismaClient,
   // compras as PrismaCompra,
-  lineascompras as PrismaLineaCompra,
+  lineasingresos as PrismaLineaCompra,
   proveedores as PrismaProveedor,
   materiasprimas as PrismaMateriasPrimas
 } from "@prisma/client";
-import { Compra, LineasCompras } from "../models/compras";
+import { IngresoMP, LineaIngreso } from "../models/ingresoMP";
 import { Proveedor } from "../models/proveedores";
 import { MateriaPrima } from "../models/materiasPrimas";
 
-interface ExtendedCompra extends Omit<Compra, 'lineasCompras'> {
+interface ExtendedIngreso extends Omit<IngresoMP, 'lineasIngreso'> {
   proveedorId: number,
   proveedor: PrismaProveedor;
-  lineascompras?: PrismaLineaCompra[];
+  lineasingreso?: PrismaLineaCompra[];
 }
 
-export interface CompraRepository {
-  createCompra(compra: Compra): Promise<Compra>;
-  getCompraById(compraId: number): Promise<Compra | null>;
-  getAllCompras(): Promise<Compra[]>;
+export interface IngresoRepository {
+  createIngreso(ingresoMP: IngresoMP): Promise<IngresoMP>;
+  getIngresoById(ingresoId: number): Promise<IngresoMP | null>;
+  getAllIngresos(): Promise<IngresoMP[]>;
   // Agrega otros métodos según sea necesario
 }
 
-export class PrismaCompraRepository implements CompraRepository {
+export class PrismaIngresoRepository implements IngresoRepository {
   private prisma: PrismaClient;
 
   constructor(prismaClient: PrismaClient) {
     this.prisma = prismaClient;
   }
 
-  async createCompra(compra: Compra): Promise<Compra> {
-    const createdCompra = await this.prisma.compras.create({
+  async createIngreso(ingresoMP: IngresoMP): Promise<IngresoMP> {
+    const createdIngreso = await this.prisma.ingresosmp.create({
       data: {
-        fecha: compra.fecha,
-        comentarios: compra.comentarios || "",
+        fecha: ingresoMP.fecha,
+        comentarios: ingresoMP.comentarios || "",
         proveedor: {
-          connect: { id: Number(compra.proveedor) }, // Suponiendo que ya tienes el ID del proveedor
+          connect: { id: Number(ingresoMP.proveedor) }, // Suponiendo que ya tienes el ID del proveedor
         },
-        lineascompras: {
-          create: compra.lineasCompras.map((linea) => ({
+        lineasingreso: {
+          create: ingresoMP.lineasIngreso.map((linea) => ({
             precio: parseFloat(String(linea.precio)),
             cantidad: parseFloat(String(linea.cantidad)),
             materiaprima: { connect: { id: Number(linea.materiaprima) } }, // Ajuste aquí
@@ -47,7 +47,7 @@ export class PrismaCompraRepository implements CompraRepository {
         },
       },
       include: {
-        lineascompras: {
+        lineasingreso: {
           include: {
             materiaprima: true
           }
@@ -57,9 +57,9 @@ export class PrismaCompraRepository implements CompraRepository {
     });
 
     // Actualizar cantidadStock después de crear la compra
-    for (const lineaCompra of compra.lineasCompras) {
-      const materiaPrimaId = Number(lineaCompra.materiaprima);
-      const cantidad = parseFloat(String(lineaCompra.cantidad));
+    for (const lineaIngreso of ingresoMP.lineasIngreso) {
+      const materiaPrimaId = Number(lineaIngreso.materiaprima);
+      const cantidad = parseFloat(String(lineaIngreso.cantidad));
 
       // Obtener la materia prima correspondiente
       const materiaPrima = await this.prisma.materiasprimas.findUnique({
@@ -75,14 +75,14 @@ export class PrismaCompraRepository implements CompraRepository {
       }
     }
 
-    return this.mapToCompra(createdCompra);
+    return this.mapToCompra(createdIngreso);
   }
 
-  async getCompraById(compraId: number): Promise<Compra | null> {
-    const compra = await this.prisma.compras.findUnique({
-      where: { id: compraId },
+  async getIngresoById(ingresoId: number): Promise<IngresoMP | null> {
+    const ingresoMP = await this.prisma.ingresosmp.findUnique({
+      where: { id: ingresoId },
       include: {
-        lineascompras: {
+        lineasingreso: {
           include: {
             materiaprima: true
           }
@@ -91,13 +91,13 @@ export class PrismaCompraRepository implements CompraRepository {
       },
     });
 
-    return compra ? this.mapToCompra(compra) : null;
+    return ingresoMP ? this.mapToCompra(ingresoMP) : null;
   }
 
-  async getAllCompras(): Promise<Compra[]> {
-    const compras = await this.prisma.compras.findMany({
+  async getAllIngresos(): Promise<IngresoMP[]> {
+    const ingresosMP = await this.prisma.ingresosmp.findMany({
       include: {
-        lineascompras: {
+        lineasingreso: {
           include: {
             materiaprima: true
           }
@@ -106,33 +106,33 @@ export class PrismaCompraRepository implements CompraRepository {
       },
     });
     
-    const comprasPromises = compras.map((compra) => this.mapToCompra(compra));
-    const comp = await Promise.all(comprasPromises)
-    return comp
+    const ingresosPromises = ingresosMP.map((ingreso) => this.mapToCompra(ingreso));
+    const ingresos = await Promise.all(ingresosPromises)
+    return ingresos
   }
 
-  private async mapToCompra(prismaCompra: ExtendedCompra): Promise<Compra> {
-    const lineasComprasPromises = prismaCompra.lineascompras?.map((linea) => this.mapToLineaCompras(linea)) || [];
-    const lineasCompras = await Promise.all(lineasComprasPromises)
+  private async mapToCompra(prismaIngreso: ExtendedIngreso): Promise<IngresoMP> {
+    const lineasIngresoPromises = prismaIngreso.lineasingreso?.map((linea) => this.mapToLineaCompras(linea)) || [];
+    const lineasIngreso = await Promise.all(lineasIngresoPromises)
     return {
-      id: prismaCompra.id,
-      fecha: prismaCompra.fecha,
-      comentarios: prismaCompra.comentarios ?? "",
-      proveedor: this.mapToProveedor(prismaCompra.proveedor),
+      id: prismaIngreso.id,
+      fecha: prismaIngreso.fecha,
+      comentarios: prismaIngreso.comentarios ?? "",
+      proveedor: this.mapToProveedor(prismaIngreso.proveedor),
       // lineasCompras: prismaCompra.lineascompras.map((linea) => this.mapToLineaCompras(linea)),
-      lineasCompras: lineasCompras
+      lineasIngreso: lineasIngreso
     };
   }
 
-  private async mapToLineaCompras(prismaLineaCompra: PrismaLineaCompra): Promise<LineasCompras> {
+  private async mapToLineaCompras(prismaLineaIngreso: PrismaLineaCompra): Promise<LineaIngreso> {
     const mp = await this.prisma.materiasprimas.findUnique({
-      where: { id: prismaLineaCompra.materiaPrimaId },
+      where: { id: prismaLineaIngreso.materiaPrimaId },
     });
     if (mp) {
       return {
-        id: prismaLineaCompra.id,
-        precio: prismaLineaCompra.precio,
-        cantidad: prismaLineaCompra.cantidad,
+        id: prismaLineaIngreso.id,
+        precio: prismaLineaIngreso.precio,
+        cantidad: prismaLineaIngreso.cantidad,
         materiaprima: this.mapToMateriaPrima(mp)
       };
     } else {

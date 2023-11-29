@@ -14,7 +14,7 @@ model materiasprimas {
   id            Int             @id @default(autoincrement())
   nombre        String
   cantidadStock Float
-  lineascompras lineascompras[]
+  lineasingreso lineasingresos[]
 }
 
 model proveedores {
@@ -30,24 +30,24 @@ model proveedores {
   fechaRegistro DateTime  @db.Date
   descripcion   String
   habilitado    Boolean
-  compras       compras[]
+  ingresomp     ingresosmp[]
 }
 
-model compras {
+model ingresosmp {
   id            Int             @id @default(autoincrement())
   fecha         DateTime
   comentarios   String?
   proveedorId   Int
   proveedor     proveedores     @relation(fields: [proveedorId], references: [id])
-  lineascompras lineascompras[]
+  lineasingreso lineasingresos[]
 }
 
-model lineascompras {
+model lineasingresos {
   id             Int            @id @default(autoincrement())
   precio         Float
   cantidad       Float
-  compraId       Int
-  compra         compras        @relation(fields: [compraId], references: [id])
+  ingresoId       Int
+  ingresomp      ingresosmp        @relation(fields: [ingresoId], references: [id])
   materiaPrimaId Int
   materiaprima   materiasprimas @relation(fields: [materiaPrimaId], references: [id])
 }
