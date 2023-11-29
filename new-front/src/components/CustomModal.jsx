@@ -57,7 +57,7 @@ export default function CustomModal({
           style={buttonStyle}
           // variant="contained"
         >
-          Cerrar
+          Cancelar
         </Button>
         {guardar && (
           <Button

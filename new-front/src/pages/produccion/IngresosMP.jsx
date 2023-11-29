@@ -29,6 +29,7 @@ function IngresosMP() {
   const [proveedorSeleccionado, setProveedorSeleccionado] = useState();
   const [totalPedido, setTotalPedido] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
+  const [isOpenCancelar, setIsOpenCancelar] = useState(false);
 
   const openModal = () => {
     setIsOpen(true);
@@ -36,6 +37,14 @@ function IngresosMP() {
 
   const closeModal = () => {
     setIsOpen(false);
+  };
+
+  const openModalCancelar = () => {
+    setIsOpenCancelar(true);
+  };
+
+  const closeModalCancelar = () => {
+    setIsOpenCancelar(false);
   };
 
   const {
@@ -177,7 +186,7 @@ function IngresosMP() {
           </div>{" "}
           <div style={{ textAlign: "right", width: "100%" }}>
             {" "}
-            <button className="Button">CANCELAR</button>
+            <button className="Button" onClick={openModalCancelar}>CANCELAR</button>
             <button className="Button" onClick={openModal}>
               GUARDAR
             </button>
@@ -185,10 +194,17 @@ function IngresosMP() {
               isOpen={isOpen}
               onClose={closeModal}
               aceptar={true}
-              cancelar={true}
               title="Registrar ingreso"
               content="¿Desea registrar el ingreso?"
               onSave={handleSubmit((values) => mutate(values))}
+            />
+            <CustomModal
+              isOpen={isOpenCancelar}
+              onClose={closeModalCancelar}
+              aceptar={true}
+              title="Cancelar ingreso"
+              content="¿Desea cancelar el ingreso?"
+              onSave={() => navigate('/materias-primas/listado')}
             />
           </div>
         </div>
