@@ -131,11 +131,11 @@ function Row(props) {
               <Table size="small" aria-label="purchases">
                 <TableHead>
                   <TableRow>
-                    <TableCell align="center">Producto</TableCell>
-                    <TableCell align="center">Descripcion</TableCell>
-                    <TableCell align="center">Precio por kg</TableCell>
-                    <TableCell align="center">Cantidad (kg)</TableCell>
-                    <TableCell align="center">Total ($)</TableCell>
+                    <TableCell align="center"> <strong> Producto</strong></TableCell>
+                    <TableCell align="center"> <strong>Descripción </strong></TableCell>
+                    <TableCell align="center"> <strong>Precio por kg </strong></TableCell>
+                    <TableCell align="center"><strong>Cantidad (kg) </strong></TableCell>
+                    <TableCell align="center"> <strong>Total línea($) </strong></TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>

@@ -126,7 +126,7 @@ function DetalleCompra() {
         >
           {" "}
           <button className="Button" onClick={() => setShowModal(true)}>
-            Imprimir
+            IMPRIMIR
           </button>
         </div>
         <Modal

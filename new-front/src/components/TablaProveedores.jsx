@@ -21,7 +21,7 @@ function BuscadorID() {
     return (
         <TextField
             fullWidth
-            label="Buscar ID"
+            label="Buscar proveedor"
         />
     );
 }
@@ -58,9 +58,6 @@ function Row(props) {
                     <Checkbox />
                 </TableCell>
                 <TableCell component="th" scope="row" align="center">
-                    {row.id}
-                </TableCell>
-                <TableCell component="th" scope="row" align="center">
                     {row.name}
                 </TableCell>
                 <TableCell align="center">{row.fecha}</TableCell>
@@ -87,9 +84,9 @@ function Row(props) {
 
                         {/* Detalle de cada fila */}
                         <Box sx={{ margin: 1 }}>
-                            <Typography variant="h6" gutterBottom component="div">
+                            <h3>
                                 Compras realizadas al proveedor
-                            </Typography>
+                            </h3>
                             <Table size="small" aria-label="purchases">
                                 <TableHead>
                                     <TableRow>
@@ -162,12 +159,12 @@ export default function TablaProveedores() {
                                 <Button color="info" size="small" variant="outlined">Todos</Button>
                                 {/* <button className='Button'>Select all</button>   */}
                             </TableCell>
-                            <TableCell align="center"><Typography variant="h6" color="initial">ID</Typography></TableCell>
-                            <TableCell align="center"><Typography variant="h6" color="initial">Nombre</Typography></TableCell>
-                            <TableCell align="center"><Typography variant="h6" color="initial">Fecha Registro</Typography></TableCell>
-                            <TableCell align="center"><Typography variant="h6" color="initial">Compras</Typography></TableCell>
-                            <TableCell align="center"><Typography variant="h6" color="initial"> </Typography></TableCell>
-                            <TableCell align="center"><Typography variant="h6" color="initial"> </Typography></TableCell>
+                            <TableCell align="center"><strong>Nombre</strong></TableCell>
+                            <TableCell align="center"><strong>Fecha Registro</strong></TableCell>
+                            <TableCell align="center"><strong>Compras</strong></TableCell>
+                            <TableCell align="center"><strong> </strong></TableCell>
+                            <TableCell align="center"><strong> </strong></TableCell>
+
                         </TableRow>
                     </TableHead>
                     <TableBody>
