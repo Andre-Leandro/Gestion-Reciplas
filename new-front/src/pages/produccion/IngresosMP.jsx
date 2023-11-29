@@ -18,6 +18,9 @@ import { useNavigate } from "react-router-dom";
 import { createCompra } from "../../utils/api/compras";
 import { getAllProveedores } from "../../utils/api/proveedores";
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 function IngresosMP() {
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
@@ -84,12 +87,14 @@ function IngresosMP() {
   const { mutate, isLoading } = useMutation({
     mutationFn: (formData) => createCompra(formData),
     onSuccess: () => {
-      alert("Compra exitosa pibe 👽 👾");
-      navigate(-1);
+      toast.success("Ingreso registrado con exito", {
+        position: "bottom-center"})
+      setValue("comentarios", "")
+      setDataTable([]);
     },
     onError: (error) => {
-      const errorMessage = error?.message;
-      alert("Error inesperado: 👽 👾", errorMessage);
+      toast.error("Error de red 👾. Intente nuevamente", {
+        position: "bottom-center"})
     },
   });
 
@@ -100,7 +105,7 @@ function IngresosMP() {
           <div style={{ padding: "0px 0px 20px 20px" }}>
             <Navegacion />
           </div>
-          <h1 style={{ margin: "0" }}>INGRESO MATERIA PRIMA</h1>
+          <h1 style={{ margin: "0" }}>INGRESO MATERIA PRIMA</h1><ToastContainer />
         </div>
         <div className="Caja">
           <CssBaseline />
@@ -220,7 +225,8 @@ function IngresosMP() {
                     <button
                       className="primary-button"
                       // onClick={handleSubmit((values) => console.log("form: ", values))}
-                      onClick={handleSubmit((values) => mutate(values))}
+                      // onClick={handleSubmit((values) => (mutate(values), setShowModal2(false)))}
+                      onClick={handleSubmit((values) => (mutate(values), setShowModal2(false)))}
                     >
                       Aceptar
                     </button>
