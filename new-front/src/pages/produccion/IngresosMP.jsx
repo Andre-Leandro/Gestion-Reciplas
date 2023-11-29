@@ -22,9 +22,6 @@ import CustomModal from "../../components/CustomModal";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-// import * as yup from "yup";
-// import { yupResolver } from '@hookform/resolvers/yup';
-
 function IngresosMP() {
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
@@ -87,40 +84,56 @@ function IngresosMP() {
     console.log("Deprecado: ", dataTable);
   }, [dataTable]);
 
-  /*   // Backdrop JSX code
-  const renderBackdrop = (props) => <div className="backdrop" {...props} />;
-
-  var handleClose = () => setShowModal(false);
-
-  var handleSuccess = () => {
-    console.log("success");
-  };
-
-  const [showModal2, setShowModal2] = useState(false);
-
-  // Backdrop JSX code
-  const renderBackdrop2 = (props) => <div className="backdrop" {...props} />;
-
-  var handleClose2 = () => setShowModal2(false);
-
-  var handleSuccess2 = () => {
-    console.log("success");
-  }; */
-
   const { mutate, isLoading } = useMutation({
     mutationFn: (formData) => createIngreso(formData),
     onSuccess: () => {
       toast.success("Ingreso registrado con exito", {
-        position: "bottom-center"})
+        position: "bottom-center"
+      })
       setValue("comentarios", "")
       setDataTable([]);
       setTotalPedido(0)
     },
     onError: (error) => {
       toast.error("Error de red 👾. Intente nuevamente", {
-        position: "bottom-center"})
+        position: "bottom-center"
+      })
     },
   });
+
+  const validateForm = (values) => {
+    const errors = {};
+
+    if (!values.proveedor) {
+      errors.proveedor = 'Seleccione algún proveedor';
+    }
+
+    if (!values.lineasIngreso || values.lineasIngreso.length === 0) {
+      errors.lineasIngreso = 'Agregue al menos una linea de ingreso';
+    }
+    return errors;
+  };
+
+  const sub = (values) => {
+    const errors = validateForm(values);
+
+    if (Object.keys(errors).length === 0) {
+      mutate(values)
+    } else {
+      if (errors.proveedor) {
+        toast.warning(`${errors.proveedor}`, {
+          position: "bottom-center"
+        })
+      }
+      if (errors.lineasIngreso) {
+        toast.warning(`${errors.lineasIngreso}`, {
+          position: "bottom-center"
+        })
+      }
+      console.log('Errores de validación:', errors);
+    }
+    // mutate(values)
+  }
 
   return (
     <>
@@ -199,7 +212,7 @@ function IngresosMP() {
               aceptar={true}
               title="Registrar ingreso"
               content="¿Desea registrar el ingreso?"
-              onSave={handleSubmit((values) => mutate(values))}
+              onSave={handleSubmit((values) => sub(values))}
             />
             <CustomModal
               isOpen={isOpenCancelar}

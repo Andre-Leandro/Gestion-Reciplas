@@ -18,7 +18,7 @@ import { NavLink } from "react-router-dom";
 import "../componentsStyles.css";
 import { useQuery, useMutation } from "react-query";
 import { getAllProveedores } from "../utils/api/proveedores";
-import { getAllCompras } from "../utils/api/compras";
+import { getAllIngresos } from "../utils/api/ingresos";
 import { useState } from "react";
 import { formatoFechaISOaDDMMAAAA } from "../utils/general";
 
@@ -89,10 +89,10 @@ function Row(props) {
                 <TableHead>
                   <TableRow>
                     <TableCell align="center">
-                      <strong>Fecha</strong>
+                      <strong>ID Compra</strong>
                     </TableCell>
                     <TableCell align="center">
-                      <strong>ID Compra</strong>
+                      <strong>Fecha</strong>
                     </TableCell>
                     <TableCell align="center">
                       <strong>Total ($)</strong>
@@ -141,11 +141,11 @@ function Row(props) {
  */
 export default function TablaProveedores() {
   const proveedores = useQuery("proveedores", () => getAllProveedores()).data;
-  const compras = useQuery("compras", () => getAllCompras()).data;
+  const compras = useQuery("compras", () => getAllIngresos()).data;
 
   // Función para calcular el total de una compra
   const calcularTotalCompra = (compra) => {
-    return compra?.lineasCompras?.reduce(
+    return compra?.lineasIngreso?.reduce(
       (total, lineaCompra) => total + lineaCompra.precio * lineaCompra.cantidad,
       0
     );
