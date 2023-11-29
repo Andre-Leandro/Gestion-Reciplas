@@ -19,7 +19,7 @@ import Paper from "@mui/material/Paper";
 import DeleteIcon from '@mui/icons-material/Delete';
 
 
-function RegistrarMP( {dataTable, setDataTable, totalPedido, setTotalPedido} ) {
+function RegistrarMP({ dataTable, setDataTable, totalPedido, setTotalPedido }) {
   const { data, isLoading: isLoadingMP, error } = useQuery("materias", () =>
     getAllMateriasPrimas()
   );
@@ -45,7 +45,7 @@ function RegistrarMP( {dataTable, setDataTable, totalPedido, setTotalPedido} ) {
       const nuevoElemento = {
         id: selectedValue.id,
         precio: 0,
-        cantidad: 0,
+        cantidad: 1,
         materiaprima: selectedValue.id,
       };
 
@@ -139,8 +139,26 @@ function RegistrarMP( {dataTable, setDataTable, totalPedido, setTotalPedido} ) {
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
                   <TableCell align="center">{data.find((item) => item.id === row.materiaprima)?.nombre}</TableCell>
-                  <TableCell align="center"><TextField id="outlined-basic" variant="outlined" defaultValue={row.cantidad} onChange={(e) => handleEdit(e, row.id, 'cantidad')} /></TableCell>
-                  <TableCell align="center"><TextField id="outlined-basic" variant="outlined" defaultValue={row.precio} onChange={(e) => handleEdit(e, row.id, 'precio')} /></TableCell>
+                  <TableCell align="center">
+                    <TextField
+                      id="outlined-basic"
+                      type="number"
+                      variant="outlined"
+                      defaultValue={row.cantidad}
+                      onChange={(e) => handleEdit(e, row.id, 'cantidad')}
+                      sx={{ width: 100 }}
+                    />
+                  </TableCell>
+                  <TableCell align="center">
+                    <TextField
+                      id="outlined-basic"
+                      type='number'
+                      variant="outlined"
+                      defaultValue={row.precio}
+                      onChange={(e) => handleEdit(e, row.id, 'precio')}
+                      sx={{ width: 100 }}
+                    />
+                  </TableCell>
                   <TableCell align="center">{Number(row.cantidad) * Number(row.precio)}</TableCell>
                   <TableCell align="center">
                     {" "}
@@ -151,7 +169,7 @@ function RegistrarMP( {dataTable, setDataTable, totalPedido, setTotalPedido} ) {
                     >
                       Eliminar
                     </Button> */}
-                    <DeleteIcon color="error" style={{ cursor: 'pointer' }} onClick={() => eliminarElemento(row)}/>
+                    <DeleteIcon color="error" style={{ cursor: 'pointer' }} onClick={() => eliminarElemento(row)} />
                   </TableCell>
                 </TableRow>
               ))}
@@ -169,7 +187,7 @@ function RegistrarMP( {dataTable, setDataTable, totalPedido, setTotalPedido} ) {
         }}
       >
         <p style={{ paddingRight: "5px" }}>TOTAL:</p>
-        <TextField disabled id="FechaRegistro" value={totalPedido} />{" "}
+        <TextField disabled id="FechaRegistro" value={totalPedido} sx={{ width: 100 }}/>{" "}
       </div>
     </div>
   );
