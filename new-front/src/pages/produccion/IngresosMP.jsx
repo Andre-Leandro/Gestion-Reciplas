@@ -17,6 +17,7 @@ import { useQuery, useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { createCompra } from "../../utils/api/compras";
 import { getAllProveedores } from "../../utils/api/proveedores";
+import CustomModal from "../../components/CustomModal";
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -27,13 +28,23 @@ function IngresosMP() {
   const [dataTable, setDataTable] = useState([]);
   const [proveedorSeleccionado, setProveedorSeleccionado] = useState();
 
+  const [isOpen, setIsOpen] = useState(false);
+
+  const openModal = () => {
+    setIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsOpen(false);
+  };
+
   const {
     data,
     isLoading: isLoadingMP,
     error,
   } = useQuery("proveedores", () => getAllProveedores());
 
-  console.log(data)
+  console.log(data);
 
   const {
     control,
@@ -64,7 +75,7 @@ function IngresosMP() {
     console.log("Deprecado: ", dataTable);
   }, [dataTable]);
 
-  // Backdrop JSX code
+  /*   // Backdrop JSX code
   const renderBackdrop = (props) => <div className="backdrop" {...props} />;
 
   var handleClose = () => setShowModal(false);
@@ -82,7 +93,7 @@ function IngresosMP() {
 
   var handleSuccess2 = () => {
     console.log("success");
-  };
+  }; */
 
   const { mutate, isLoading } = useMutation({
     mutationFn: (formData) => createCompra(formData),
@@ -165,13 +176,19 @@ function IngresosMP() {
           </div>{" "}
           <div style={{ textAlign: "right", width: "100%" }}>
             {" "}
-            <button className="Button" onClick={() => setShowModal(true)}>
-              CANCELAR
-            </button>
-            <button className="Button" onClick={() => setShowModal2(true)}>
+            <button className="Button">CANCELAR</button>
+            <button className="Button" onClick={openModal}>
               GUARDAR
             </button>
-            <div>
+            <CustomModal
+              isOpen={isOpen}
+              onClose={closeModal}
+              guardar={true}
+              title="Registrar ingreso"
+              content="Se registrara el nuevo ingreso"
+              onSave={handleSubmit((values) => mutate(values))}
+            />
+            {/* <div>
               <Modal
                 className="modal"
                 show={showModal}
@@ -233,7 +250,7 @@ function IngresosMP() {
                   </div>
                 </div>
               </Modal>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
