@@ -9,8 +9,12 @@ import Grid from "@mui/material/Unstable_Grid2";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
+import { createProveedor } from "../../utils/api/proveedores";
+import { useQuery, useMutation } from "react-query";
+import { useNavigate } from "react-router-dom";
 
 function Datos() {
+  const navigate = useNavigate();
 
 
   const [formData, setFormData] = useState({
@@ -19,9 +23,10 @@ function Datos() {
     dni: "",
     direccion: "",
     localidad: "",
-    provincia: "", //
+    provincia: "", 
     telefono: "",
-    email: "",
+    correo: "",
+    cuil:""
   });
 
   const handleInputChange = (e) => {
@@ -32,8 +37,24 @@ function Datos() {
     }));
   };
 
+
+
+  const { mutate, isLoading } = useMutation({
+    mutationFn: (formData) => createProveedor(formData),
+    onSuccess: () => {
+      alert("Proveedor creado mannnnnnnn");
+      navigate(-1);
+    },
+    onError: (error) => {
+      const errorMessage = error?.message;
+      alert("Error inesperado: busque a nilson", errorMessage);
+    },
+  });
+
+
+
   const handleSubmit = () => {
-    // Aquí puedes enviar formData a tu servidor o realizar otras acciones
+    mutate(formData)
     console.log(formData);
   };
 
@@ -145,14 +166,27 @@ function Datos() {
               <TextField
                 fullWidth
                 enable
-                id="email"
+                id="correo"
                 label="Correo Electronico"
-                value={formData.email}
+                value={formData.correo}
                 onChange={handleInputChange}
                
                 
               />
+              
             </Grid>
+            <Grid item xs={6}>
+              <TextField
+                fullWidth
+                enable
+                id="cuil"
+                label="CUIL/CUIT"
+                value={formData.cuil}
+                onChange={handleInputChange}
+               
+                
+              /> 
+              </Grid>
            
           </Grid>
         </Box>
