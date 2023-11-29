@@ -1,6 +1,10 @@
 import { get, post, put, del } from "./baseApi";
 
-// personasServices
+
 export async function getAllProveedores() {
   return get('/proveedores')
+}
+
+export async function createProveedor(compra) {
+  return post(`/proveedores`, compra);
 }

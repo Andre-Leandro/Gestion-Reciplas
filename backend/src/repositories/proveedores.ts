@@ -33,27 +33,31 @@ export class PrismaProveedorRepository implements ProveedorRepository {
       data: {
         nombre: proveedor.nombre,
         apellido: proveedor.apellido,
-        cuilCuit: proveedor.cuilCuit,
+        cuilCuit: proveedor.cuil,
         direccion: proveedor.direccion,
         localidad: proveedor.localidad,
         provincia: proveedor.provincia,
         telefono: proveedor.telefono,
         correo: proveedor.correo,
-        fechaRegistro: proveedor.fechaRegistro,
-        descripcion: proveedor.descripcion,
-        habilitado: proveedor.habilitado,
+        fechaRegistro: new Date(),
+        descripcion: proveedor.descripcion ? proveedor.descripcion : "Gran proveedor",
+        habilitado: true,
       },
     });
     return this.mapToProveedor(createdProveedor);
   }
 
   async updateProveedor(proveedor: Proveedor): Promise<Proveedor | null> {
+
+    
+    console.log(proveedor)
+
     const updatedProveedor = await this.prisma.proveedores.update({
       where: { id: proveedor.id },
       data: {
         nombre: proveedor.nombre,
         apellido: proveedor.apellido,
-        cuilCuit: proveedor.cuilCuit,
+        cuilCuit: proveedor.cuil,
         direccion: proveedor.direccion,
         localidad: proveedor.localidad,
         provincia: proveedor.provincia,
@@ -79,7 +83,7 @@ export class PrismaProveedorRepository implements ProveedorRepository {
       id: prismaProveedor.id,
       nombre: prismaProveedor.nombre,
       apellido: prismaProveedor.apellido,
-      cuilCuit: prismaProveedor.cuilCuit,
+      cuil: prismaProveedor.cuilCuit,
       direccion: prismaProveedor.direccion,
       localidad: prismaProveedor.localidad,
       provincia: prismaProveedor.provincia,

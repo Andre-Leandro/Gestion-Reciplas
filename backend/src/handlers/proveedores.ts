@@ -31,6 +31,9 @@ export class ProveedorHandler {
 
   createProveedor(): RequestHandler {
     return async (req, res) => {
+
+      console.log("request")
+      console.log(req.body)
       const proveedorData: Proveedor = req.body;
 
       const createdProveedor = await this.proveedorService.createProveedor(proveedorData);
