@@ -9,6 +9,8 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Checkbox, TextField, Grid, Button } from '@mui/material';
 import MateriasPrimas from "../utils/data/MateriasPrimas.json"
+import { getAllMateriasPrimas } from '../utils/api/materiasPrimas';
+import { useQuery } from 'react-query';
 
 
 
@@ -54,9 +56,16 @@ function Buscador({ searchTerm, onSearchTermChange }) {
 // Componente de la tabla
 export default function Tabla() {
   const [searchTerm, setSearchTerm] = useState('');
+  const {
+    data,
+    isLoading: isLoadingMP,
+    error,
+  } = useQuery("proveedores", () => getAllMateriasPrimas());
+
+  console.log(data);
 
   // Filtra los datos según el término de búsqueda
-  const filteredRows = MateriasPrimas.filter((row) =>
+  const filteredRows = data?.filter((row) =>
     row.nombre.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
@@ -75,21 +84,21 @@ export default function Tabla() {
                 {/* <button className='Button'>Select all</button>   */}
               </TableCell>
               <TableCell align="center"><strong>Nombre</strong></TableCell>
-              <TableCell align="center"><strong>Descripcion</strong></TableCell>
+              {/* <TableCell align="center"><strong>Descripcion</strong></TableCell> */}
               <TableCell align="center"><strong>Cantidad Mínima (kg)</strong></TableCell>
               <TableCell align="center"><strong>Cantidad Actual (kg)</strong></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {filteredRows.map((row) => (
+            {filteredRows?.map((row) => (
               <TableRow key={row.nombre}>
                 <TableCell align="center">
                   <Checkbox />
                 </TableCell>
                 <TableCell align="center">{row.nombre}</TableCell>
-                <TableCell align="center">{row.descripcion}</TableCell>
-                <TableCell align="center">{row.cantidadMin}</TableCell>
-                <TableCell align="center">{row.cantidadActual}</TableCell>
+                {/* <TableCell align="center">{row.descripcion}</TableCell> */}
+                <TableCell align="center">{(row.cantidadStock)*0.19}</TableCell>
+                <TableCell align="center">{row.cantidadStock}</TableCell> 
               </TableRow>
             ))}
           </TableBody>

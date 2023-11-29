@@ -36,7 +36,7 @@ function RegistrarMP({ dataTable, setDataTable, totalPedido, setTotalPedido }) {
     }
 
     // Verificar si el producto ya está en rows
-    const productoExistente = dataTable.find(
+    const productoExistente = dataTable?.find(
       (row) => row.id === selectedValue.id
     );
 
@@ -60,7 +60,7 @@ function RegistrarMP({ dataTable, setDataTable, totalPedido, setTotalPedido }) {
     const cantidad = Number(row.cantidad);
     const totalEliminar = precio * cantidad;
 
-    const nuevaLista = dataTable.filter((row) => row.id !== id);
+    const nuevaLista = dataTable?.filter((row) => row.id !== id);
     setDataTable(nuevaLista);
     setTotalPedido((prevTotal) => Number(prevTotal) - totalEliminar);
   }
@@ -76,7 +76,7 @@ function RegistrarMP({ dataTable, setDataTable, totalPedido, setTotalPedido }) {
 
     // Encontrar la fila correspondiente en el estado y actualizar el campo
     setDataTable((prevDataTable) => {
-      const rowIndex = prevDataTable.findIndex((item) => item.id === id);
+      const rowIndex = prevDataTable?.findIndex((item) => item.id === id);
 
       // Crear una nueva matriz para evitar la mutación directa del estado
       const newDataTable = [...prevDataTable];
@@ -138,7 +138,7 @@ function RegistrarMP({ dataTable, setDataTable, totalPedido, setTotalPedido }) {
                   key={row.id}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
-                  <TableCell align="center">{data.find((item) => item.id === row.materiaprima)?.nombre}</TableCell>
+                  <TableCell align="center">{data?.find((item) => item.id === row.materiaprima)?.nombre}</TableCell>
                   <TableCell align="center">
                     <TextField
                       id="outlined-basic"
