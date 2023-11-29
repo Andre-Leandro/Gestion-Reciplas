@@ -4,7 +4,7 @@ export type Proveedor = {
     id?: number;
     nombre: string;
     apellido: string;
-    cuil: string;
+    cuilCuit: string;
     direccion: string;
     localidad: string;
     provincia: string;

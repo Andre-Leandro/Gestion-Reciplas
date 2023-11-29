@@ -33,7 +33,7 @@ export class PrismaProveedorRepository implements ProveedorRepository {
       data: {
         nombre: proveedor.nombre,
         apellido: proveedor.apellido,
-        cuilCuit: proveedor.cuil,
+        cuilCuit: proveedor.cuilCuit,
         direccion: proveedor.direccion,
         localidad: proveedor.localidad,
         provincia: proveedor.provincia,
@@ -57,7 +57,7 @@ export class PrismaProveedorRepository implements ProveedorRepository {
       data: {
         nombre: proveedor.nombre,
         apellido: proveedor.apellido,
-        cuilCuit: proveedor.cuil,
+        cuilCuit: proveedor.cuilCuit,
         direccion: proveedor.direccion,
         localidad: proveedor.localidad,
         provincia: proveedor.provincia,
@@ -83,7 +83,7 @@ export class PrismaProveedorRepository implements ProveedorRepository {
       id: prismaProveedor.id,
       nombre: prismaProveedor.nombre,
       apellido: prismaProveedor.apellido,
-      cuil: prismaProveedor.cuilCuit,
+      cuilCuit: prismaProveedor.cuilCuit,
       direccion: prismaProveedor.direccion,
       localidad: prismaProveedor.localidad,
       provincia: prismaProveedor.provincia,
