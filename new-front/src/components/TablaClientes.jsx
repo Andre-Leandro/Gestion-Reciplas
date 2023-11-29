@@ -132,7 +132,13 @@ function Row(props) {
 
 
 const rows = [
-    createData( 'Jorge Gonzalez', "Particular", "02/05/2023", 34)
+    createData('Jorge Gonzalez', 'Particular', '02/05/2023', 34),
+createData('María Rodríguez', 'Particular', '01/15/2023', 42),
+createData('Gigared', 'Empresa', '03/20/2023', 28),
+ createData('Ana Martínez', 'Particular', '04/10/2023', 56),
+createData('Telecom', 'Empresa ', '05/02/2023', 39),
+ createData('Laura Gómez', 'Particular', '06/08/2023', 45),
+
 ]
 
 export default function TablaClientes() {

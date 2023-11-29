@@ -13,24 +13,22 @@ export default function SelectSmall() {
 
   return (
     <>
-      Sector:
-      <Select
-        fullWidth
-        labelId="demo-select-small-label"
-        id="demo-select-small"
-        value={age}
-        label="Age"
-        onChange={handleChange}
-        style={{ width: "83%" }}
-      >
-        {/*<MenuItem value="">
-          <em>None</em>
-        </MenuItem> */}
-        <MenuItem value={10}>Administración</MenuItem>
-        <MenuItem value={20}>Ventas</MenuItem>
-        <MenuItem value={30}>Compras</MenuItem>
-        <MenuItem value={30}>Producción</MenuItem>
-      </Select>
-    </>
+ <FormControl fullWidth>
+  <InputLabel id="demo-simple-select-label">Sector</InputLabel>
+  <Select
+    labelId="demo-simple-select-label"
+    id="demo-simple-select"
+    value={age}
+    label="sector"
+    onChange={handleChange}
+  >
+      <MenuItem value={10}>Administración</MenuItem>
+      <MenuItem value={20}>Ventas</MenuItem>
+      <MenuItem value={30}>Compras</MenuItem>
+      <MenuItem value={40}>Producción</MenuItem>
+  </Select>
+</FormControl>
+  </>
   );
 }
+

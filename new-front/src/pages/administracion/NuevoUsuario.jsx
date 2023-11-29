@@ -8,7 +8,6 @@ import {
   Link,
   Card,
 } from "@mui/material";
-//import './RegisterProductPage.css'; // Agrega un archivo CSS para estilos adicionales
 
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputLabel from "@mui/material/InputLabel";
@@ -35,7 +34,7 @@ function Datos() {
       <CssBaseline />
       <div style={{ display: "inline", width: "100%", height: "100%" }}>
         <div>
-          <h3 style={{ marginLeft: 5, textAlign: "left" }}>
+          <h3 style={{ marginLeft: 45, textAlign: "left" }}>
             Datos de nuevo usuario
           </h3>
         </div>
@@ -115,56 +114,7 @@ function Datos() {
     </React.Fragment>
   );
 }
-/* Grid
-container
-xs={12}
-justifyContent="flex-start"
-alignItems="center"
-spacing={1}
-rowSpacing={2}
-columnSpacing={{ xs: 1, sm: 2, md: 3 }}
->
-<Grid item xs={4}>
-  <label>
-    <TextField
-      id="outlined-multiline-flexible"
-      label="Nombre"
-      multiline
-      maxRows={6}
-    />
-  </label>
-</Grid>
 
-<Grid item xs={4}>
-  <label>
-    <TextField
-      id="outlined-multiline-flexible"
-      label="Apellido"
-      multiline
-      maxRows={4}
-    />
-  </label>
-</Grid>
-<Grid item xs={4}>
-  <TextField
-    id="date"
-    label="Fecha de nacimiento"
-    type="date"
-    defaultValue="2017-05-24"
-    InputLabelProps={{
-      shrink: true,
-    }}
-  />
-</Grid>
-<Grid item xs={6}>
-  <TextField
-    id="outlined-multiline-flexible"
-    label="Usuario"
-    multiline
-    maxRows={6}
-  />
-</Grid>
-</Grid> */
 
 function NuevoUsuario() {
   const [productType, setProductType] = useState("");
@@ -269,7 +219,7 @@ function NuevoUsuario() {
               className="Button"
               onClick={() => setShowModal(true)}
             >
-              Cancelar
+              CANCELAR
             </button>
           </div>
 
@@ -304,7 +254,7 @@ function NuevoUsuario() {
 
           {/* <button type="submit">Registrar</button> */}
           <button className="Button" onClick={() => setShowModal2(true)}>
-            Registrar
+            REGISTRAR
           </button>
           {/* <button type="button">Cancelar</button> */}
           <Modal

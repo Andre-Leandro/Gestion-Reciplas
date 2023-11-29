@@ -45,12 +45,11 @@ function Row(props) {
   return (
     <React.Fragment>
       <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
-        <TableCell>{row.fecha}</TableCell>
+        <TableCell align="center" > {row.fecha}</TableCell>
         <TableCell component="th" scope="row" align="center">
           {row.name}
         </TableCell>
-        <TableCell align="right">{row.id}</TableCell>
-        <TableCell align="right">{row.total}</TableCell>
+        <TableCell align="center">{row.total}</TableCell>
         <TableCell align="center">
           <IconButton
             aria-label="expand row"
@@ -66,18 +65,18 @@ function Row(props) {
           <Collapse in={open} timeout="auto" unmountOnExit>
 
             {/* Detalle de cada fila */}
-            <Box sx={{ margin: 1 }}>
+            <Box sx={{ margin: 2 }}>
               
-                <h2>Detalle de venta</h2>
+                <h3>Detalle de venta</h3>
               
               <Table size="small" aria-label="purchases">
                 <TableHead>
                   <TableRow>
-                    <TableCell align="center">Producto</TableCell>
-                    <TableCell align="center">Descripcion</TableCell>
-                    <TableCell align="center">P/U</TableCell>
-                    <TableCell align="center">Cantidad</TableCell>
-                    <TableCell align="center">Total ($)</TableCell>
+                  <TableCell align="center"><strong>Producto</strong></TableCell>
+                  <TableCell align="center"><strong>Descripción</strong></TableCell>
+                  <TableCell align="center"><strong>P/U</strong></TableCell>
+                  <TableCell align="center"><strong>Cantidad</strong></TableCell>
+                  <TableCell align="center"><strong>Total línea($)</strong></TableCell>
 
                   </TableRow>
                 </TableHead>
@@ -114,9 +113,9 @@ function Row(props) {
 const rows = [
   createData('Jorge Ramirez', 9999, "02/03/2023", 2400),
   createData('Arrejin Sixto', 237, "15/03/2023", 37),
-  createData('Maciel Meister', 123, "10/05/2023", 1500),
+  createData('Juan Meister', 123, "10/05/2023", 1500),
   createData('San Lorenzo André', 456, "22/06/2023", 3000),
-  createData('Gonzalez', 789, "05/09/2023", 800),
+  createData('Ernesto Gonzalez', 789, "05/09/2023", 800),
   // Agrega más datos aquí si lo deseas
 ];
 
@@ -127,11 +126,10 @@ export default function TablaDeudores() {
         <Table aria-label="collapsible table">
           <TableHead>
             <TableRow>
-              <TableCell><Typography variant="h6" color="initial">Fecha</Typography></TableCell>
-              <TableCell align="center"><Typography variant="h6" color="initial">Cliente</Typography></TableCell>
-              <TableCell align="center"><Typography variant="h6" color="initial">Venta ID</Typography></TableCell>
-              <TableCell align="center"><Typography variant="h6" color="initial">Total</Typography></TableCell>
-              <TableCell align="center"><Typography variant="h6" color="initial">Detalles</Typography></TableCell>
+              <TableCell align="center" >  <strong>Fecha Venta</strong></TableCell>
+              <TableCell align="center"><strong>Cliente</strong></TableCell>
+              <TableCell align="center"><strong>Total ($) </strong></TableCell>
+              <TableCell align="center"><strong>Detalles</strong></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

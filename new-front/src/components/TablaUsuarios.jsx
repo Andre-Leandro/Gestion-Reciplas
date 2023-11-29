@@ -46,15 +46,7 @@ function Row(props) {
                         </button></NavLink>
                 </TableCell>
 
-                {/* <TableCell align="center">
-                    <IconButton
-                        aria-label="expand row"
-                        size="small"
-                        onClick={() => setOpen(!open)}
-                    >
-                        {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-                    </IconButton>
-                </TableCell> */}
+
             </TableRow>
             
         </React.Fragment>
@@ -63,12 +55,12 @@ function Row(props) {
 
 
 const rows = [
-    createData(123, 'Jorge Gonzalez', "Produccion"),
-    createData(234, 'Plasticor', "Ventas"),
+    createData(123, 'Jorge Gonzalez', "Producción"),
+    createData(234, 'Hector Lopez', "Ventas"),
     createData(345, 'Sixto Arrejin', "Compras"),
-    createData(456, 'Tobias Maciel Meister', "Administracion"),
-    createData(567, 'Xtreme', "Administracion"),
-    createData(678, 'Nilson', "Ventas"),
+    createData(456, 'Tobias Suarez', "Administración"),
+    createData(567, 'Lusi Perez', "Administración"),
+    createData(678, 'Nilson Orrego', "Ventas"),
 ];
 
 export default function TablaUsuarios() {
@@ -78,10 +70,11 @@ export default function TablaUsuarios() {
                 <Table aria-label="collapsible table">
                     <TableHead>
                         <TableRow>
-                            <TableCell align="center"><Typography variant="h6" color="initial">ID</Typography></TableCell>
-                            <TableCell align="center"><Typography variant="h6" color="initial">Nombre</Typography></TableCell>
-                            <TableCell align="center"><Typography variant="h6" color="initial">Area</Typography></TableCell>
-                            <TableCell align="center"><Typography variant="h6" color="initial"> </Typography></TableCell>
+                        <TableCell align="center"><strong>ID</strong></TableCell>
+                        <TableCell align="center"><strong>Nombre</strong></TableCell>
+                        <TableCell align="center"><strong>Área</strong></TableCell>
+                        <TableCell align="center"></TableCell>
+
                         </TableRow>
                     </TableHead>
                     <TableBody>
