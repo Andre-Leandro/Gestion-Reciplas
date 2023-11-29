@@ -27,7 +27,7 @@ function IngresosMP() {
   const [showModal, setShowModal] = useState(false);
   const [dataTable, setDataTable] = useState([]);
   const [proveedorSeleccionado, setProveedorSeleccionado] = useState();
-
+  const [totalPedido, setTotalPedido] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
 
   const openModal = () => {
@@ -102,6 +102,7 @@ function IngresosMP() {
         position: "bottom-center"})
       setValue("comentarios", "")
       setDataTable([]);
+      setTotalPedido(0)
     },
     onError: (error) => {
       toast.error("Error de red 👾. Intente nuevamente", {
@@ -172,7 +173,7 @@ function IngresosMP() {
         </div>
         <div className="Caja" style={{ margin: "20px" }}>
           <div className="Tabla">
-            <RegistrarMP dataTable={dataTable} setDataTable={setDataTable} />
+            <RegistrarMP dataTable={dataTable} setDataTable={setDataTable} totalPedido={totalPedido} setTotalPedido={setTotalPedido} />
           </div>{" "}
           <div style={{ textAlign: "right", width: "100%" }}>
             {" "}

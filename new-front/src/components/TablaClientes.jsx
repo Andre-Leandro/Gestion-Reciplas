@@ -133,11 +133,10 @@ function Row(props) {
 
 const rows = [
     createData( 'Jorge Gonzalez', "Particular", "02/05/2023", 34)
-];
 
 export default function TablaClientes() {
     return (
-        <Grid>
+        <Grid style={{ width: '100%', padding: '10px' }}>
             <Grid container direction="row" xs={12}>
                 <div style={{ paddingBottom: '30px', marginRight: "5px" }}>
                     <BuscadorID />

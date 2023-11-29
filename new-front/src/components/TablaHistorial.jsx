@@ -19,16 +19,16 @@ const rows = [
   createData(56789, "2023-01-05", 15, 1500),
 ];
 
-function TablaHistorial() {
+function TablaHistorial({ persona }) {
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>Codigo</TableCell>
-            <TableCell align="right">Fecha</TableCell>
-            <TableCell align="right">Cantidad</TableCell>
-            <TableCell align="right">Total</TableCell>
+            <TableCell><strong>{ persona=='cliente' ? 'ID Venta' : 'ID Compra'}</strong></TableCell>
+            <TableCell align="center"><strong>Fecha</strong></TableCell>
+            <TableCell align="center"><strong>Cantidad</strong></TableCell>
+            <TableCell align="center"><strong>Total ($)</strong></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -40,9 +40,9 @@ function TablaHistorial() {
               <TableCell component="th" scope="row">
                 {row.codigo}
               </TableCell>
-              <TableCell align="right">{row.fecha}</TableCell>
-              <TableCell align="right">{row.cantidad}</TableCell>
-              <TableCell align="right">{row.total}</TableCell>
+              <TableCell align="center">{row.fecha}</TableCell>
+              <TableCell align="center">{row.cantidad}</TableCell>
+              <TableCell align="center">{row.total}</TableCell>
             </TableRow>
           ))}
         </TableBody>

@@ -7,7 +7,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Button, Grid } from '@mui/material';
+import { Button, Grid, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import { Checkbox, TextField } from '@mui/material';
@@ -34,7 +34,7 @@ function Buscador({ searchTerm, onSearchTermChange }) {
     <Grid container xs={3}>
       <TextField
             fullWidth
-            label="Buscar ID"
+            label="Buscar código"
         />
     </Grid>
     
@@ -81,22 +81,20 @@ export default function TablaPedidosNew() {
                 <Button color="info" size="small" variant="outlined">Todos</Button>
                 {/* <button className='Button'>Select all</button>   */}
               </TableCell>
-              <TableCell align="center">ID</TableCell>
-              <TableCell align="center">Nombre</TableCell>
-              <TableCell align="center">Fecha</TableCell>
-              <TableCell align="center">Estado</TableCell>
+              <TableCell align="center"><strong>Código pedido</strong></TableCell>
+              <TableCell align="center"><strong>Nombre cliente</strong></TableCell>
+              <TableCell align="center"><strong>Fecha</strong></TableCell>
+              <TableCell align="center"><strong>Estado</strong></TableCell>
               <TableCell align="center"> </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {filteredRows.map((row) => (
               <TableRow key={row.name}>
-                <TableCell align="left" component="th" scope="row">
+                <TableCell align="center" component="th" scope="row">
                   <Checkbox />
                 </TableCell>
-                <TableCell align="left" component="th" scope="row">
-                  {row.name}
-                </TableCell>
+                <TableCell align="center">{row.name}</TableCell>
                 <TableCell align="center">{row.nombre}</TableCell>
                 <TableCell align="center">{row.fecha}</TableCell>
                 <TableCell align="center">{row.estado}</TableCell>

@@ -115,7 +115,7 @@ function Datos() {
                 disabled
                 id="FechaRegistro"
                 label="Fecha Registro"
-                defaultValue=" "
+                defaultValue="12/05/2022"
               />
             </Grid>
           </Grid>
@@ -229,9 +229,11 @@ function DetallesPedidosProd() {
   return (
     <>
       <div className="Page">
-        <div style={{ width: "100%", paddingBottom: "30px" }}>
-          <h1 style={{ margin: "0" }}>DETALLES DE PEDIDOS</h1>
-          <Navegacion />
+        <div className="ParteSuperior">
+          <div style={{ padding: "0px 0px 20px 20px" }}>
+            <Navegacion />
+          </div>
+          <h1 style={{ margin: "0" }}>DETALLES DE PEDIDO</h1>
         </div>
         <div className="Caja">
           <Datos />
@@ -251,7 +253,7 @@ function DetallesPedidosProd() {
               display: "flex",
             }}
           >
-            <p style={{ paddingRight: "5px" }}>TOTAL:</p>
+            <p style={{ paddingRight: "5px" }}>TOTAL ($):</p>
             <TextField disabled id="FechaRegistro" defaultValue="11060" />
           </div>
         </div>
