@@ -212,7 +212,7 @@ function RegistrarMP( {dataTable, setDataTable} ) {
                     {" "}
                     <Button
                       className="Button"
-                      color="primary"
+                      color="error"
                       onClick={() => eliminarElemento(row)}
                     >
                       Eliminar
