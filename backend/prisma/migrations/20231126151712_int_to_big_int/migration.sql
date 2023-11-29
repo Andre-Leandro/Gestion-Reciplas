@@ -1,0 +1,4 @@
+-- AlterTable
+ALTER TABLE "proveedores" ALTER COLUMN "cuilCuit" SET DATA TYPE BIGINT,
+ALTER COLUMN "telefono" SET DATA TYPE BIGINT,
+ALTER COLUMN "fechaRegistro" SET DATA TYPE DATE;
