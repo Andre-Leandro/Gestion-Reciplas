@@ -1,7 +1,7 @@
 import * as React from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { Button } from "@mui/material";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 /* import Listbox from "./Listbox"; */
 /* import MateriasPrimas from "../utils/data/MateriasPrimas.json"; */
 import TextField from "@mui/material/TextField";
@@ -19,14 +19,12 @@ import Paper from "@mui/material/Paper";
 import DeleteIcon from '@mui/icons-material/Delete';
 
 
-function RegistrarMP( {dataTable, setDataTable} ) {
+function RegistrarMP( {dataTable, setDataTable, totalPedido, setTotalPedido} ) {
   const { data, isLoading: isLoadingMP, error } = useQuery("materias", () =>
     getAllMateriasPrimas()
   );
 
   const [selectedValue, setSelectedValue] = useState(null);
-
-  let [totalPedido, setTotalPedido] = useState(0);
 
   const agregarElemento = () => {
     console.log(data);
@@ -101,8 +99,6 @@ function RegistrarMP( {dataTable, setDataTable} ) {
       setTotalPedido(newTotalPedido);
 
       return newDataTable;
-
-      return newDataTable;
     });
   };
 
@@ -137,7 +133,7 @@ function RegistrarMP( {dataTable, setDataTable} ) {
               </TableRow>
             </TableHead>
             <TableBody>
-              {dataTable.map((row) => (
+              {dataTable?.map((row) => (
                 <TableRow
                   key={row.id}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
