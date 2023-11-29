@@ -25,11 +25,10 @@ function TablaListadoDeProductos() {
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>Codigo</TableCell>
-            <TableCell align="right">Producto</TableCell>
-            <TableCell align="right">Cantidad</TableCell>
-            <TableCell align="right">Precio</TableCell>
-            <TableCell align="right">Total</TableCell>
+            <TableCell><strong>Producto</strong></TableCell>
+            <TableCell align="center"><strong>Cantidad</strong></TableCell>
+            <TableCell align="center"><strong>Precio ($)</strong></TableCell>
+            <TableCell align="center"><strong>Total ($)</strong></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -38,13 +37,10 @@ function TablaListadoDeProductos() {
               key={row.codigo}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
-              <TableCell component="th" scope="row">
-                {row.codigo}
-              </TableCell>
-              <TableCell align="right">{row.producto}</TableCell>
-              <TableCell align="right">{row.cantidad}</TableCell>
-              <TableCell align="right">{row.precio}</TableCell>
-              <TableCell align="right">{row.total}</TableCell>
+              <TableCell>{row.producto}</TableCell>
+              <TableCell align="center">{row.cantidad}</TableCell>
+              <TableCell align="center">{row.precio}</TableCell>
+              <TableCell align="center">{row.total}</TableCell>
             </TableRow>
           ))}
         </TableBody>
