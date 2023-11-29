@@ -16,6 +16,8 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import DeleteIcon from '@mui/icons-material/Delete';
+
 
 function RegistrarMP( {dataTable, setDataTable} ) {
   const { data, isLoading: isLoadingMP, error } = useQuery("materias", () =>
@@ -64,56 +66,6 @@ function RegistrarMP( {dataTable, setDataTable} ) {
     setDataTable(nuevaLista);
     setTotalPedido((prevTotal) => Number(prevTotal) - totalEliminar);
   }
-
-  /*     const handleOnChange = (event, value) => {
-    onSelect(value); // Aquí obtienes el valor seleccionado por el usuario
-  }; */
-
-  /*   const columns = [
-      { field: "codigo", headerName: "ID", width: 90 },
-      {
-        field: "producto",
-        headerName: "Materia Prima",
-        width: 250,
-        editable: false,
-      },
-      {
-        field: "cantidad",
-        headerName: "Cantidad",
-        width: 150,
-        editable: true,
-      },
-      {
-        field: "precio",
-        headerName: "Precio",
-        width: 110,
-        editable: true,
-      },
-      {
-        field: "total",
-        headerName: "Total",
-        description: "This column has a value getter and is not sortable.",
-        sortable: false,
-        width: 160,
-      },
-      {
-        sortable: false,
-        disableSelectionOnClick: true,
-        field: "eliminar",
-        headerName: "",
-        width: 110,
-        editable: false,
-        renderCell: (params) => (
-          <Button
-            className="Button"
-            color="primary"
-            onClick={() => eliminarElemento(params.row)}
-          >
-            Eliminar
-          </Button>
-        ),
-      },
-    ]; */
 
   const handleSelect = (value) => {
     setSelectedValue(value);
@@ -173,29 +125,15 @@ function RegistrarMP( {dataTable, setDataTable} ) {
       </div>
       <div>
         {" "}
-        {/* <DataGrid
-          autoHeight
-          disableColumnFilter
-          disableColumnMenu
-          disableColumnSelector
-          disableRowSelectionOnClick
-          rows={dataTable}
-          columns={columns}
-          disableSelectionOnClick
-          onCellEditStop={handleEdit}
-          pagination={false}
-          pageSizeOptions={false}
-          hideFooterPagination
-        /> */}
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>
               <TableRow>
-                <TableCell align="center">Materia Prima</TableCell>
-                <TableCell align="center">Cantidad</TableCell>
-                <TableCell align="center">Precio</TableCell>
-                <TableCell align="center">Total</TableCell>
-                <TableCell align="center">Eliminar</TableCell>
+                <TableCell align="center"><strong>Materia Prima</strong></TableCell>
+                <TableCell align="center"><strong>Cantidad</strong></TableCell>
+                <TableCell align="center"><strong>Precio</strong></TableCell>
+                <TableCell align="center"><strong>Total ($)</strong></TableCell>
+                <TableCell align="center"><strong>Eliminar</strong></TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -210,13 +148,14 @@ function RegistrarMP( {dataTable, setDataTable} ) {
                   <TableCell align="center">{Number(row.cantidad) * Number(row.precio)}</TableCell>
                   <TableCell align="center">
                     {" "}
-                    <Button
+                    {/* <Button
                       className="Button"
                       color="error"
                       onClick={() => eliminarElemento(row)}
                     >
                       Eliminar
-                    </Button>
+                    </Button> */}
+                    <DeleteIcon color="error" style={{ cursor: 'pointer' }} onClick={() => eliminarElemento(row)}/>
                   </TableCell>
                 </TableRow>
               ))}
